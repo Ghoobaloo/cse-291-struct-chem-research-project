@@ -74,7 +74,10 @@ print("Dataloader length: ", len(dataloader))
 
 # create iterator for the dataloader
 dataloader = iter(dataloader)
-model.eval().to("cuda")
+device = "cude" if torch.cuda.is_available() else "cpu"
+model.eval().to(device)
+#model.eval().to("cuda")
+
 # iterate over the dataloader
 for i in range(2):
     batch = next(dataloader)
@@ -100,19 +103,20 @@ for i in range(2):
     #     # no_repeat_ngram_size=2,
     #     # temperature=0.7,
     # )
-
+    print('started generation')
     output = tokenizer.decode(
         model.generate(
-            input_ids=batch["input_ids"].squeeze().to("cuda"),
+            input_ids=batch["input_ids"].squeeze().to(device),
             pad_token_id=tokenizer.pad_token_id,
             max_new_tokens=1024,
             # logits_processor=[
             #     FlippedLogitsProcessor()
             # ],
-            generation_config=GenerationConfig(temperature=0.0, do_sample=False),
+            generation_config=GenerationConfig(do_sample=False),
         )[-1],
         skip_special_tokens=True,
     )
+    print('done generation')
     #generated_text = tokenizer.decode(generated_ids[0], skip_special_tokens=True)
     # decode the model outputs (this is inference)
     import pdb; pdb.set_trace()
