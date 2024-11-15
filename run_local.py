@@ -14,6 +14,7 @@ from prompts.refine_prompt import refine_formulae_prompt, refine_reasoning_promp
 import openai
 from openai import OpenAI
 from tqdm import tqdm
+import torch
 
 from huggingface_hub import hf_hub_download
 
@@ -24,6 +25,8 @@ HUGGINGFACE_API_KEY = "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"
 
 model_id = "google/gemma-2-2b-it-GGUF"
 filenames = ["2b_it_v2.gguf"]
+
+device = "cuda" if torch.cuda.is_available() else "cpu"
 
 for filename in filenames:
     downloaded_model_path = hf_hub_download(
@@ -47,10 +50,10 @@ class HuggingFaceModel:
     def __init__(self, max_tokens=1024, temperature=0.0, logprobs=None, n=1, engine='gpt-4',
         frequency_penalty=0, presence_penalty=0, stop=None, rstrip=False, **kwargs):
 
-        self.tokenizer = AutoTokenizer.from_pretrained("google/gemma-2-2b-it")
-        self.model = AutoModelForCausalLM.from_pretrained("google/gemma-2-2b-it")
+        self.tokenizer = AutoTokenizer.from_pretrained(model_id)
+        self.model = AutoModelForCausalLM.from_pretrained(model_id)
 
-        self.pipeline = pipeline("text-generation", model=self.model, device=-1, tokenizer=self.tokenizer, truncation=True, max_length=max_tokens)
+        self.pipeline = pipeline("text-generation", model=self.model, device=device, tokenizer=self.tokenizer, truncation=True, max_length=max_tokens)
 
         self.max_tokens = max_tokens
         self.temperature = temperature

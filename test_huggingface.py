@@ -74,7 +74,7 @@ print("Dataloader length: ", len(dataloader))
 
 # create iterator for the dataloader
 dataloader = iter(dataloader)
-device = "cude" if torch.cuda.is_available() else "cpu"
+device = "cuda" if torch.cuda.is_available() else "cpu"
 model.eval().to(device)
 #model.eval().to("cuda")
 
