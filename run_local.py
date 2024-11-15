@@ -19,8 +19,11 @@ from huggingface_hub import hf_hub_download
 
 HUGGINGFACE_API_KEY = "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"
 
-model_id = "google/gemma-2-2b-it"
-filenames = ["config.json", "generation_config.json", "model-00001-of-00002.safetensors", "model-00002-of-00002.safetensors", "model.safetensors.index.json", "special_tokens_map.json", "tokenizer.json", "tokenizer.model", "tokenizer_config.json"]
+#model_id = "google/gemma-2-2b-it"
+#filenames = ["config.json", "generation_config.json", "model-00001-of-00002.safetensors", "model-00002-of-00002.safetensors", "model.safetensors.index.json", "special_tokens_map.json", "tokenizer.json", "tokenizer.model", "tokenizer_config.json"]
+
+model_id = "google/gemma-2-2b-it-GGUF"
+filenames = ["2b_it_v2.gguf"]
 
 for filename in filenames:
     downloaded_model_path = hf_hub_download(
@@ -73,9 +76,10 @@ class HuggingFaceModel:
         #not perfect, could use some work later
         message = "System: You are an expert chemist. Your expertise lies in reasoning and addressing chemistry problems. User: " + prompt
 
-        print('I have the message: ', message) 
+        print('STARTED GENERATION') 
         response = self.pipeline(message)[0]['generated_text']
-        print('got response: ', response)
+        print('ENDED GENERATION')
+        #print('got response: ', response)
 
         return response
 
@@ -244,7 +248,11 @@ def run(file, max_attempts, base_lm, mode, pot):
     with open("./datasets/{}.json".format(file)) as f:
         test_data = json.load(f)
 
+    nr = 0
     for item in tqdm(test_data):
+        nr += 1
+        print('Doing: ', nr, ' out of ', len(tqdm(test_data)))
+
         problem_text = item['problem_text']
         unit_prob = item['unit']
         new_problem = "\n\n Now try to solve the following problem:\n" + problem_text + " The unit of the answer is " + unit_prob + "."
