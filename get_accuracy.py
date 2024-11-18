@@ -27,7 +27,9 @@ def load_jsonl(path):
             data.append(json.loads(line))
     return data
 
-ans = load_jsonl("/shared/data3/siruo2/instruct_chem/vicuna_all.jsonl")[39:len(original)+39]
+ans = load_jsonl("./outputs/atkins_res.jsonl")
+
+print(len(original), len(ans))
 
 assert len(ans) == len(original)
 
