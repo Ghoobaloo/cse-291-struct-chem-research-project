@@ -20,13 +20,17 @@ from huggingface_hub import hf_hub_download
 
 HUGGINGFACE_API_KEY = "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"
 
-#model_id = "google/gemma-2-2b-it"
-#filenames = ["config.json", "generation_config.json", "model-00001-of-00002.safetensors", "model-00002-of-00002.safetensors", "model.safetensors.index.json", "special_tokens_map.json", "tokenizer.json", "tokenizer.model", "tokenizer_config.json"]
+model_id = "google/gemma-2-2b-it"
+filenames = ["config.json", "generation_config.json", "model-00001-of-00002.safetensors", "model-00002-of-00002.safetensors", "model.safetensors.index.json", "special_tokens_map.json", "tokenizer.json", "tokenizer.model", "tokenizer_config.json"]
 
-model_id = "google/gemma-2-2b-it-GGUF"
-filenames = ["2b_it_v2.gguf"]
+#model_id = "google/gemma-2-2b-it-GGUF"
+#filenames = ["2b_it_v2.gguf"]
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
+print('Device: ', device)
+print(torch.cuda.is_available())  # Should return True
+print(torch.cuda.device_count())
+#print(refine_reasoning_prompt_pot)
 
 for filename in filenames:
     downloaded_model_path = hf_hub_download(
@@ -151,6 +155,10 @@ class GPT4:
 MODEL = HuggingFaceModel()
 
 def verify_formula(problem_statement: str, formulae: str, max_attempts: int) -> str:
+
+    #added by me
+    global refine_formulae_prompt
+
     gpt = MODEL
     formulae_retrieved = formulae
 
@@ -162,7 +170,7 @@ def verify_formula(problem_statement: str, formulae: str, max_attempts: int) -> 
 
     n_attempts = 0
     max_confidence = 0.0
-
+    
     while n_attempts < max_attempts:
         
         with io.StringIO() as f:
@@ -194,6 +202,9 @@ def verify_formula(problem_statement: str, formulae: str, max_attempts: int) -> 
     return formulae, flag
 
 def verify_reasoning(problem_statement: str, formula: str, reasoning: str, max_attempts: int, pot: bool) -> str:
+    
+    #added by me
+    global refine_reasoning_prompt
 
     gpt = MODEL
 

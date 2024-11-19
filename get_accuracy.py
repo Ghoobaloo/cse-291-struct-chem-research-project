@@ -27,7 +27,7 @@ def load_jsonl(path):
             data.append(json.loads(line))
     return data
 
-ans = load_jsonl("./outputs/atkins_res.jsonl")
+ans = load_jsonl("./outputs/atkins_res.jsonl")[:105]
 
 print(len(original), len(ans))
 
