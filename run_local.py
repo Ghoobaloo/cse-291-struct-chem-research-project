@@ -68,16 +68,16 @@ class HuggingFaceModel:
                       "content": prompt,}]
         #not perfect, could use some work later
         message = "System: You are an expert chemist. Your expertise lies in reasoning and addressing chemistry problems. User: " + prompt
-        message = "hello. how are you?"
 
-        print('STARTED GENERATION') 
-        print('the prompt is: ', message)
+        #print('STARTED GENERATION') 
+        #print('the prompt is: ', message)
         response = self.pipeline(message)
-        print('response: ', response)
-        print('response[0]: ' , response[0])
+        #print('response: ', response)
+        #print('response[0]: ' , response[0])
         answer = response[0]['generated_text']
-        print('ENDED GENERATION')
-        print('got response: ', answer)
+        answer = answer[len(message):]
+        #print('ENDED GENERATION')
+        #print('got response: ', answer)
 
         return answer
 
@@ -171,9 +171,13 @@ def verify_formula(problem_statement: str, formulae: str, max_attempts: int) -> 
             model_input = f.getvalue()
 
         refined_formulae = gpt.complete(model_input)
+        
+        print('we have input refine formula: ', model_input)
+        print('we have refined formula: ', refined_formulae)
 
         formulae_new, conf_f = refined_formulae.split("**Confidence score:**")[0].strip("\n"), refined_formulae.split("**Confidence score:**")[1].strip()
         
+        print('new formula woo: ', formulae_new)
         # extract the confidence score and the refined components
         conf = float(re.findall(r"\d+\.?\d*", conf_f)[0])
         formulae_new = "**Formula retrieval:**" + formulae_new.split("**Formula retrieval:**")[1]
