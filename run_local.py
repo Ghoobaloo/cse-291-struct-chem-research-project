@@ -233,7 +233,10 @@ def verify_reasoning(problem_statement: str, formula: str, reasoning: str, max_a
         print('GOT REASONING INPUT: ', model_input)
         print('GOT REFINED REASONING: ', refined_reasoning)
 
+        refined_reasoning = '**Judgement of the reasoning process:**' + refined_reasoning.split('**Judgement of the reasoning process:**')[1].strip()
+
         reasoning_new, conf_f = refined_reasoning.split("**Confidence score:**")[0].strip("\n"), refined_reasoning.split("**Confidence score:**")[1].strip()
+        conf_f = conf_f.splitlines()[0]
 
         print('GOT REASONING NEW: ', reasoning_new)
         print('GOT CONFIDENCE STRING: ', conf_f)
@@ -274,7 +277,7 @@ def run(file, max_attempts, base_lm, mode, pot):
     nr = 0
     for item in tqdm(test_data):
         nr += 1
-        print('Doing: ', nr, ' out of ', len(tqdm(test_data)))
+        print('DOING: ', nr, ' OUT OF ', len(tqdm(test_data)))
 
         problem_text = item['problem_text']
         unit_prob = item['unit']
@@ -295,23 +298,23 @@ def run(file, max_attempts, base_lm, mode, pot):
         ### 1. First decompose the problem solving process with formulae retrieval and reasoning process
         response = gpt4.complete(prompt=problem_statement)
 
-        print('got first response: ', response, '\n\n')
+        print('GOT FIRST RESPONSE: ', response, '\n\n')
 
         ## 1.1 Parse the generated results of formulae and reasoning
         formula_retrieval, reasoning_process = response.split("**Reasoning/calculation process:**")[0], response.split("**Reasoning/calculation process:**")[1]
         reasoning_process = "**Reasoning/calculation process:**" + reasoning_process.split("**Answer conclusion:**")[0]
 
-        print('got formulas: ', formula_retrieval, '\n\n')
-        print('got reasoning: ', reasoning_process, '\n\n')
+        print('GOT FORMULAS: ', formula_retrieval, '\n\n')
+        print('GOT REASONING: ', reasoning_process, '\n\n')
         
         ### 2. Iterative review and refinement of formulae and reasoning
         feedback_problem = problem_text + " The unit of the answer is " + unit_prob + "."
         formula_refined, flag_formula = verify_formula(feedback_problem, formula_retrieval, max_attempts)
         reasoning_refined, flag_reasoning = verify_reasoning(feedback_problem, formula_refined, reasoning_process, max_attempts, pot)
 
-        print('after refinement we have formula: ', formula_refined, '\n\n')
-        print('after refinement we have reasoning: ', reasoning_refined, '\n\n')
-        print('we have flags: ', flag_formula, flag_reasoning, '\n\n')
+        print('AFTER REFINEMENT WE HAVE FORMULA: ', formula_refined, '\n\n')
+        print('AFTER REFINEMENT WE HAVE REASONING: ', reasoning_refined, '\n\n')
+        print('WE HAVE FLAGS: ', flag_formula, flag_reasoning, '\n\n')
 
         ### 3. Conclude the answers
         if not pot:
@@ -331,7 +334,7 @@ def run(file, max_attempts, base_lm, mode, pot):
             except:
                 final_response = "None"
 
-        print('lastly the final response: ', final_response, '\n\n')
+        print('LASTLY THE FINAL RESPONSE: ', final_response, '\n\n')
 
         cur = {}
         cur['gpt_output'] = final_response
