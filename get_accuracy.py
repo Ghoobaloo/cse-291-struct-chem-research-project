@@ -17,7 +17,16 @@ def equiv(model_output, answer, unit):
         return True
     return False
 
-with open("./scibench/dataset/original/atkins.json") as f:
+#DATASET = "atkins"
+#SIZE = 105
+#DATASET = "chemmc"
+#SIZE = 38
+#DATASET = "matter"
+#SIZE = 47
+DATASET = "quan"
+SIZE = 33
+
+with open("./scibench/dataset/original/" + DATASET + ".json") as f:
     original = json.load(f)
 
 def load_jsonl(path):
@@ -27,7 +36,7 @@ def load_jsonl(path):
             data.append(json.loads(line))
     return data
 
-ans = load_jsonl("./outputs/atkins_res.jsonl")[:105]
+ans = load_jsonl("./outputs/" + DATASET + "_res.jsonl")[-SIZE:]
 
 print(len(original), len(ans))
 
@@ -37,9 +46,9 @@ correct = 0
 for i in range(len(ans)):
 
     problem_data = original[i]
-    model_output_ori = ans[i]['output']
+    model_output_ori = ans[i]['gpt_output']
 
-    print(model_output_ori)
+    #print("model output: ", model_output_ori)
 
     unit_prob=problem_data["unit"]
     if remove_not(problem_data["unit"]):
@@ -52,8 +61,8 @@ for i in range(len(ans)):
     #     answer=cal_not((answer, problem_data["unit"]))
 
     # print(model_output)
-    print(answer)
-    input()
+    #print("answer: ", answer)
+    #input()
 
     try:
         res_equiv = equiv(model_output, answer, problem_data["unit"])
@@ -65,4 +74,4 @@ for i in range(len(ans)):
     # print(res_equiv)
     # input()
 
-print(correct/len(ans))
+print(DATASET, correct/len(ans))

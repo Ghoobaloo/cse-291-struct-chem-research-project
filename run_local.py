@@ -20,11 +20,11 @@ from huggingface_hub import hf_hub_download
 
 HUGGINGFACE_API_KEY = "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"
 
-model_id = "google/gemma-2-2b-it"
-filenames = ["config.json", "generation_config.json", "model-00001-of-00002.safetensors", "model-00002-of-00002.safetensors", "model.safetensors.index.json", "special_tokens_map.json", "tokenizer.json", "tokenizer.model", "tokenizer_config.json"]
+#model_id = "google/gemma-2-2b-it"
+#filenames = ["config.json", "generation_config.json", "model-00001-of-00002.safetensors", "model-00002-of-00002.safetensors", "model.safetensors.index.json", "special_tokens_map.json", "tokenizer.json", "tokenizer.model", "tokenizer_config.json"]
 
-#model_id = "google/gemma-2-2b-it-GGUF"
-#filenames = ["2b_it_v2.gguf"]
+model_id = "google/gemma-2-9b-it"
+filenames = ["config.json", "generation_config.json", "model-00001-of-00004.safetensors", "model-00002-of-00004.safetensors", "model-00003-of-00004.safetensors", "model-00004-of-00004.safetensors", "model.safetensors.index.json", "special_tokens_map.json", "tokenizer.json", "tokenizer.model", "tokenizer_config.json"]
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 print('Device: ', device)
@@ -57,7 +57,7 @@ class HuggingFaceModel:
         self.tokenizer = AutoTokenizer.from_pretrained(model_id)
         self.model = AutoModelForCausalLM.from_pretrained(model_id)
 
-        self.pipeline = pipeline("text-generation", model=self.model, device=device, tokenizer=self.tokenizer, truncation=True, max_length=max_tokens)
+        self.pipeline = pipeline("text-generation", model=self.model, device=device, do_sample=False, temperature=temperature, tokenizer=self.tokenizer, truncation=True, max_length=max_tokens)
 
     def complete(self, prompt):
 
@@ -179,6 +179,7 @@ def verify_formula(problem_statement: str, formulae: str, max_attempts: int) -> 
 
         print('DEBUG: ', refined_formulae)
         print('SPLIT: ', len(refined_formulae.split('**Confidence score:**')))
+
         formulae_new, conf_f = refined_formulae.split('**Confidence score:**')[0].strip("\n"), refined_formulae.split('**Confidence score:**')[1].strip()
         conf_f = conf_f.splitlines()[0]
         
