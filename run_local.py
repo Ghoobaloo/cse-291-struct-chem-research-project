@@ -84,9 +84,10 @@ class HuggingFaceModel:
         message = "System: You are an expert chemist. Your expertise lies in reasoning and addressing chemistry problems. User: " + prompt
 
         print('STARTED GENERATION') 
+        print('the prompt is: ', message)
         response = self.pipeline(message)[0]['generated_text']
         print('ENDED GENERATION')
-        #print('got response: ', response)
+        print('got response: ', response)
 
         return response
 
