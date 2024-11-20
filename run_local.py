@@ -84,10 +84,10 @@ class HuggingFaceModel:
         message = "System: You are an expert chemist. Your expertise lies in reasoning and addressing chemistry problems. User: " + prompt
 
         print('STARTED GENERATION') 
-        print('the prompt is: ', message)
+        #print('the prompt is: ', message)
         response = self.pipeline(message)[0]['generated_text']
         print('ENDED GENERATION')
-        print('got response: ', response)
+        #print('got response: ', response)
 
         return response
 
@@ -286,14 +286,24 @@ def run(file, max_attempts, base_lm, mode, pot):
         
         ### 1. First decompose the problem solving process with formulae retrieval and reasoning process
         response = gpt4.complete(prompt=problem_statement)
+
+        print('got first response: ', response, '\n\n')
+
         ## 1.1 Parse the generated results of formulae and reasoning
         formula_retrieval, reasoning_process = response.split("**Reasoning/calculation process:**")[0], response.split("**Reasoning/calculation process:**")[1]
         reasoning_process = "**Reasoning/calculation process:**" + reasoning_process.split("**Answer conclusion:**")[0]
+
+        print('got formulas: ', formula_retrieval, '\n\n')
+        print('got reasoning: ', reasoning_process, '\n\n')
         
         ### 2. Iterative review and refinement of formulae and reasoning
         feedback_problem = problem_text + " The unit of the answer is " + unit_prob + "."
         formula_refined, flag_formula = verify_formula(feedback_problem, formula_retrieval, max_attempts)
         reasoning_refined, flag_reasoning = verify_reasoning(feedback_problem, formula_refined, reasoning_process, max_attempts, pot)
+
+        print('after refinement we have formula: ', formula_refined, '\n\n')
+        print('after refinement we have reasoning: ', reasoning_refined, '\n\n')
+        print('we have flags: ', flag_formula, flag_reasoning, '\n\n')
 
         ### 3. Conclude the answers
         if not pot:
@@ -312,6 +322,8 @@ def run(file, max_attempts, base_lm, mode, pot):
                 final_response = redirected_output.getvalue().strip()
             except:
                 final_response = "None"
+
+        print('lastly the final response: ', final_response, '\n\n')
 
         cur = {}
         cur['gpt_output'] = final_response
