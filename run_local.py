@@ -59,21 +59,7 @@ class HuggingFaceModel:
 
         self.pipeline = pipeline("text-generation", model=self.model, device=device, tokenizer=self.tokenizer, truncation=True, max_length=max_tokens)
 
-        self.max_tokens = max_tokens
-        self.temperature = temperature
-        self.rstrip = rstrip
-        self.engine = engine
-    
     def complete(self, prompt):
-
-        openai.api_version = '2023-03-15-preview'
-        self.deployment_id = self.engine
-        
-        if self.rstrip:
-            # Remove heading whitespaces improves generation stability. It is
-            # disabled by default to keep consistency.
-            prompt = prompt.rstrip()
-        retry_interval_exp = 1 
 
         #pipeline takes only a string for this model so would need to switch to a chat model later
         messages = [{"role": "system",
@@ -82,14 +68,18 @@ class HuggingFaceModel:
                       "content": prompt,}]
         #not perfect, could use some work later
         message = "System: You are an expert chemist. Your expertise lies in reasoning and addressing chemistry problems. User: " + prompt
+        message = "hello. how are you?"
 
         print('STARTED GENERATION') 
-        #print('the prompt is: ', message)
-        response = self.pipeline(message)[0]['generated_text']
+        print('the prompt is: ', message)
+        response = self.pipeline(message)
+        print('response: ', response)
+        print('response[0]: ' , response[0])
+        answer = response[0]['generated_text']
         print('ENDED GENERATION')
-        #print('got response: ', response)
+        print('got response: ', answer)
 
-        return response
+        return answer
 
 class GPT4:
 
