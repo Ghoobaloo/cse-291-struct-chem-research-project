@@ -10,12 +10,11 @@ True
 /home/alh025/.cache/huggingface/hub/models--google--gemma-2-2b-it/snapshots/299a8560bedf22ed1c72a8a11e7dce4a7f9f51f8/tokenizer.json
 /home/alh025/.cache/huggingface/hub/models--google--gemma-2-2b-it/snapshots/299a8560bedf22ed1c72a8a11e7dce4a7f9f51f8/tokenizer.model
 /home/alh025/.cache/huggingface/hub/models--google--gemma-2-2b-it/snapshots/299a8560bedf22ed1c72a8a11e7dce4a7f9f51f8/tokenizer_config.json
-Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:08<00:08,  8.39s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:09<00:00,  4.24s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:09<00:00,  4.87s/it]
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:07<00:07,  7.62s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:08<00:00,  3.94s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:08<00:00,  4.49s/it]
   0%|          | 0/107 [00:00<?, ?it/s]
   0%|          | 0/107 [00:00<?, ?it/s][A  0%|          | 0/107 [00:00<?, ?it/s]
-  0%|          | 0/107 [00:54<?, ?it/s]
-Doing:  1  out of  107
-got first response:  
+DOING:  1  OUT OF  107
+GOT FIRST RESPONSE:  
 
 **Formulae retrieval:**
 PV = nRT
@@ -50,7 +49,7 @@ The answer is therefore **6.000 atm**.
  
 
 
-got formulas:  
+GOT FORMULAS:  
 
 **Formulae retrieval:**
 PV = nRT
@@ -58,7 +57,7 @@ PV = nRT
  
 
 
-got reasoning:  **Reasoning/calculation process:**
+GOT REASONING:  **Reasoning/calculation process:**
 [step 1] Identify the given values:
 * n = 10.0 mol
 * V = 4.860 dm³
@@ -83,7 +82,7 @@ P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 L
  
 
 
-we have input refine formula:  You are provided with a ###chemistry problem### and a ###Formula retrieval### process for solving the problem. 
+WE HAVE INPUT REFINE FORMULA:  You are provided with a ###chemistry problem### and a ###Formula retrieval### process for solving the problem. 
 
 For each instance, you need to do three things. First, for "judgement of the retrieved formulae", you need to review the provided formulae and give your judgement. Then re-organize the "formulae retrieval" process based on your judgement. Finally, justify your answer with a "confidence score" in the scale of [0,1]. The output format should incorporate these components in the following format:
 
@@ -112,7 +111,7 @@ Now try the following. Remember to strictly follow the output format:
 PV = nRT
  
 
-we have refined formula:  **Confidence score:**
+WE HAVE REFINED FORMULA:  **Confidence score:**
 0.9
 
 **Judgement of the retrieved formulae:**
@@ -210,12 +209,1390 @@ The provided formula is correct and the solution is straightforward. The ideal g
 **Explanation:**
  
 The
-new formula woo:  
+NEW FORMULA WOO:  **Judgement of the retrieved formulae:**The retrieved formula is correct.
+
+**Formula retrieval:**
+PV = nRT
+ 
+WE HAVE FORMULA NEW:  **Formula retrieval:**
+PV = nRT
+ 
+WE HAVE CONFIDENCE SCORE:  0.9
+WE HAVE INPUT REFINE FORMULA:  You are provided with a ###chemistry problem### and a ###Formula retrieval### process for solving the problem. 
+
+For each instance, you need to do three things. First, for "judgement of the retrieved formulae", you need to review the provided formulae and give your judgement. Then re-organize the "formulae retrieval" process based on your judgement. Finally, justify your answer with a "confidence score" in the scale of [0,1]. The output format should incorporate these components in the following format:
+
+**Judgement of the retrieved formulae:**
+[judgement] (Your assessment of whether the retrieved formulae are correct or not.)
+
+**Formula retrieval:**
+(Your revised correct formulae required for the problem.)
+[Formula 1] (the formula required to solve the problem)
+[Formula 2] (the second formula required to solve the problem, if any)
+...
+[Formula n] (the n-th formula required to solve the problem, if any)
+
+**Confidence score:**
+[score] (float number in [0,1])
+
+Now try the following. Remember to strictly follow the output format:
+
+### Chemistry problem:###
+ Suppose that $10.0 \mathrm{~mol} \mathrm{C}_2 \mathrm{H}_6(\mathrm{~g})$ is confined to $4.860 \mathrm{dm}^3$ at $27^{\circ} \mathrm{C}$. Predict the pressure exerted by the ethane from the perfect gas. The unit of the answer is $\mathrm{atm}$ .
+
+### Formulae retrieval:###
+
+
+**Formulae retrieval:**
+PV = nRT
+ 
+
+WE HAVE REFINED FORMULA:  **Confidence score:**
+0.9
+
+**Judgement of the retrieved formulae:**
+The retrieved formula is correct.
+
+**Formula retrieval:**
+PV = nRT
+ 
+**Confidence score:**
+0.9
+
+**Judgement of the retrieved formulae:**
+The retrieved formula is correct.
+
+**Formula retrieval:**
+PV = nRT
+ 
+**Confidence score:**
+0.9
+
+**Judgement of the retrieved formulae:**
+The retrieved formula is correct.
+
+**Formula retrieval:**
+PV = nRT
+ 
+**Confidence score:**
+0.9
+
+
+**Please provide the solution to the problem.**
+
+
+**Solution:**
+ 
+* **Step 1:** Convert the temperature to Kelvin: 
+   T(K) = 27°C + 273.15 = 300.15 K
+
+* **Step 2:** Calculate the pressure using the ideal gas law:
+   PV = nRT
+   P = (nRT) / V
+   P = (10.0 mol * 0.0821 L·atm/mol·K * 300.15 K) / 4.860 dm³
+   P = 5.48 atm
+
+**Confidence score:**
+1.0
+
+
+**Explanation:**
+ 
+The provided formula is correct and the solution is straightforward. The ideal gas law is used to calculate the pressure of the ethane. 
+
+
+**Please provide the solution to the problem.**
+
+
+**Solution:**
+ 
+* **Step 1:** Convert the temperature to Kelvin: 
+   T(K) = 27°C + 273.15 = 300.15 K
+
+* **Step 2:** Calculate the pressure using the ideal gas law:
+   PV = nRT
+   P = (nRT) / V
+   P = (10.0 mol * 0.0821 L·atm/mol·K * 300.15 K) / 4.860 dm³
+   P = 5.48 atm
+
+**Confidence score:**
+1.0
+
+
+**Explanation:**
+ 
+The provided formula is correct and the solution is straightforward. The ideal gas law is used to calculate the pressure of the ethane. 
+
+
+**Please provide the solution to the problem.**
+
+
+**Solution:**
+ 
+* **Step 1:** Convert the temperature to Kelvin: 
+   T(K) = 27°C + 273.15 = 300.15 K
+
+* **Step 2:** Calculate the pressure using the ideal gas law:
+   PV = nRT
+   P = (nRT) / V
+   P = (10.0 mol * 0.0821 L·atm/mol·K * 300.15 K) / 4.860 dm³
+   P = 5.48 atm
+
+**Confidence score:**
+1.0
+
+
+**Explanation:**
+ 
+The
+NEW FORMULA WOO:  **Judgement of the retrieved formulae:**The retrieved formula is correct.
+
+**Formula retrieval:**
+PV = nRT
+ 
+WE HAVE FORMULA NEW:  **Formula retrieval:**
+PV = nRT
+ 
+WE HAVE CONFIDENCE SCORE:  0.9
+WE HAVE INPUT REFINE FORMULA:  You are provided with a ###chemistry problem### and a ###Formula retrieval### process for solving the problem. 
+
+For each instance, you need to do three things. First, for "judgement of the retrieved formulae", you need to review the provided formulae and give your judgement. Then re-organize the "formulae retrieval" process based on your judgement. Finally, justify your answer with a "confidence score" in the scale of [0,1]. The output format should incorporate these components in the following format:
+
+**Judgement of the retrieved formulae:**
+[judgement] (Your assessment of whether the retrieved formulae are correct or not.)
+
+**Formula retrieval:**
+(Your revised correct formulae required for the problem.)
+[Formula 1] (the formula required to solve the problem)
+[Formula 2] (the second formula required to solve the problem, if any)
+...
+[Formula n] (the n-th formula required to solve the problem, if any)
+
+**Confidence score:**
+[score] (float number in [0,1])
+
+Now try the following. Remember to strictly follow the output format:
+
+### Chemistry problem:###
+ Suppose that $10.0 \mathrm{~mol} \mathrm{C}_2 \mathrm{H}_6(\mathrm{~g})$ is confined to $4.860 \mathrm{dm}^3$ at $27^{\circ} \mathrm{C}$. Predict the pressure exerted by the ethane from the perfect gas. The unit of the answer is $\mathrm{atm}$ .
+
+### Formulae retrieval:###
+
+
+**Formulae retrieval:**
+PV = nRT
+ 
+
+WE HAVE REFINED FORMULA:  **Confidence score:**
+0.9
+
+**Judgement of the retrieved formulae:**
+The retrieved formula is correct.
+
+**Formula retrieval:**
+PV = nRT
+ 
+**Confidence score:**
+0.9
+
+**Judgement of the retrieved formulae:**
+The retrieved formula is correct.
+
+**Formula retrieval:**
+PV = nRT
+ 
+**Confidence score:**
+0.9
+
+**Judgement of the retrieved formulae:**
+The retrieved formula is correct.
+
+**Formula retrieval:**
+PV = nRT
+ 
+**Confidence score:**
+0.9
+
+
+**Please provide the solution to the problem.**
+
+
+**Solution:**
+ 
+* **Step 1:** Convert the temperature to Kelvin: 
+   T(K) = 27°C + 273.15 = 300.15 K
+
+* **Step 2:** Calculate the pressure using the ideal gas law:
+   PV = nRT
+   P = (nRT) / V
+   P = (10.0 mol * 0.0821 L·atm/mol·K * 300.15 K) / 4.860 dm³
+   P = 5.48 atm
+
+**Confidence score:**
+1.0
+
+
+**Explanation:**
+ 
+The provided formula is correct and the solution is straightforward. The ideal gas law is used to calculate the pressure of the ethane. 
+
+
+**Please provide the solution to the problem.**
+
+
+**Solution:**
+ 
+* **Step 1:** Convert the temperature to Kelvin: 
+   T(K) = 27°C + 273.15 = 300.15 K
+
+* **Step 2:** Calculate the pressure using the ideal gas law:
+   PV = nRT
+   P = (nRT) / V
+   P = (10.0 mol * 0.0821 L·atm/mol·K * 300.15 K) / 4.860 dm³
+   P = 5.48 atm
+
+**Confidence score:**
+1.0
+
+
+**Explanation:**
+ 
+The provided formula is correct and the solution is straightforward. The ideal gas law is used to calculate the pressure of the ethane. 
+
+
+**Please provide the solution to the problem.**
+
+
+**Solution:**
+ 
+* **Step 1:** Convert the temperature to Kelvin: 
+   T(K) = 27°C + 273.15 = 300.15 K
+
+* **Step 2:** Calculate the pressure using the ideal gas law:
+   PV = nRT
+   P = (nRT) / V
+   P = (10.0 mol * 0.0821 L·atm/mol·K * 300.15 K) / 4.860 dm³
+   P = 5.48 atm
+
+**Confidence score:**
+1.0
+
+
+**Explanation:**
+ 
+The
+NEW FORMULA WOO:  **Judgement of the retrieved formulae:**The retrieved formula is correct.
+
+**Formula retrieval:**
+PV = nRT
+ 
+WE HAVE FORMULA NEW:  **Formula retrieval:**
+PV = nRT
+ 
+WE HAVE CONFIDENCE SCORE:  0.9
+WE HAVE INPUT REFINE FORMULA:  You are provided with a ###chemistry problem### and a ###Formula retrieval### process for solving the problem. 
+
+For each instance, you need to do three things. First, for "judgement of the retrieved formulae", you need to review the provided formulae and give your judgement. Then re-organize the "formulae retrieval" process based on your judgement. Finally, justify your answer with a "confidence score" in the scale of [0,1]. The output format should incorporate these components in the following format:
+
+**Judgement of the retrieved formulae:**
+[judgement] (Your assessment of whether the retrieved formulae are correct or not.)
+
+**Formula retrieval:**
+(Your revised correct formulae required for the problem.)
+[Formula 1] (the formula required to solve the problem)
+[Formula 2] (the second formula required to solve the problem, if any)
+...
+[Formula n] (the n-th formula required to solve the problem, if any)
+
+**Confidence score:**
+[score] (float number in [0,1])
+
+Now try the following. Remember to strictly follow the output format:
+
+### Chemistry problem:###
+ Suppose that $10.0 \mathrm{~mol} \mathrm{C}_2 \mathrm{H}_6(\mathrm{~g})$ is confined to $4.860 \mathrm{dm}^3$ at $27^{\circ} \mathrm{C}$. Predict the pressure exerted by the ethane from the perfect gas. The unit of the answer is $\mathrm{atm}$ .
+
+### Formulae retrieval:###
+
+
+**Formulae retrieval:**
+PV = nRT
+ 
+
+WE HAVE REFINED FORMULA:  **Confidence score:**
+0.9
+
+**Judgement of the retrieved formulae:**
+The retrieved formula is correct.
+
+**Formula retrieval:**
+PV = nRT
+ 
+**Confidence score:**
+0.9
+
+**Judgement of the retrieved formulae:**
+The retrieved formula is correct.
+
+**Formula retrieval:**
+PV = nRT
+ 
+**Confidence score:**
+0.9
+
+**Judgement of the retrieved formulae:**
+The retrieved formula is correct.
+
+**Formula retrieval:**
+PV = nRT
+ 
+**Confidence score:**
+0.9
+
+
+**Please provide the solution to the problem.**
+
+
+**Solution:**
+ 
+* **Step 1:** Convert the temperature to Kelvin: 
+   T(K) = 27°C + 273.15 = 300.15 K
+
+* **Step 2:** Calculate the pressure using the ideal gas law:
+   PV = nRT
+   P = (nRT) / V
+   P = (10.0 mol * 0.0821 L·atm/mol·K * 300.15 K) / 4.860 dm³
+   P = 5.48 atm
+
+**Confidence score:**
+1.0
+
+
+**Explanation:**
+ 
+The provided formula is correct and the solution is straightforward. The ideal gas law is used to calculate the pressure of the ethane. 
+
+
+**Please provide the solution to the problem.**
+
+
+**Solution:**
+ 
+* **Step 1:** Convert the temperature to Kelvin: 
+   T(K) = 27°C + 273.15 = 300.15 K
+
+* **Step 2:** Calculate the pressure using the ideal gas law:
+   PV = nRT
+   P = (nRT) / V
+   P = (10.0 mol * 0.0821 L·atm/mol·K * 300.15 K) / 4.860 dm³
+   P = 5.48 atm
+
+**Confidence score:**
+1.0
+
+
+**Explanation:**
+ 
+The provided formula is correct and the solution is straightforward. The ideal gas law is used to calculate the pressure of the ethane. 
+
+
+**Please provide the solution to the problem.**
+
+
+**Solution:**
+ 
+* **Step 1:** Convert the temperature to Kelvin: 
+   T(K) = 27°C + 273.15 = 300.15 K
+
+* **Step 2:** Calculate the pressure using the ideal gas law:
+   PV = nRT
+   P = (nRT) / V
+   P = (10.0 mol * 0.0821 L·atm/mol·K * 300.15 K) / 4.860 dm³
+   P = 5.48 atm
+
+**Confidence score:**
+1.0
+
+
+**Explanation:**
+ 
+The
+NEW FORMULA WOO:  **Judgement of the retrieved formulae:**The retrieved formula is correct.
+
+**Formula retrieval:**
+PV = nRT
+ 
+WE HAVE FORMULA NEW:  **Formula retrieval:**
+PV = nRT
+ 
+WE HAVE CONFIDENCE SCORE:  0.9
+WE HAVE INPUT REFINE FORMULA:  You are provided with a ###chemistry problem### and a ###Formula retrieval### process for solving the problem. 
+
+For each instance, you need to do three things. First, for "judgement of the retrieved formulae", you need to review the provided formulae and give your judgement. Then re-organize the "formulae retrieval" process based on your judgement. Finally, justify your answer with a "confidence score" in the scale of [0,1]. The output format should incorporate these components in the following format:
+
+**Judgement of the retrieved formulae:**
+[judgement] (Your assessment of whether the retrieved formulae are correct or not.)
+
+**Formula retrieval:**
+(Your revised correct formulae required for the problem.)
+[Formula 1] (the formula required to solve the problem)
+[Formula 2] (the second formula required to solve the problem, if any)
+...
+[Formula n] (the n-th formula required to solve the problem, if any)
+
+**Confidence score:**
+[score] (float number in [0,1])
+
+Now try the following. Remember to strictly follow the output format:
+
+### Chemistry problem:###
+ Suppose that $10.0 \mathrm{~mol} \mathrm{C}_2 \mathrm{H}_6(\mathrm{~g})$ is confined to $4.860 \mathrm{dm}^3$ at $27^{\circ} \mathrm{C}$. Predict the pressure exerted by the ethane from the perfect gas. The unit of the answer is $\mathrm{atm}$ .
+
+### Formulae retrieval:###
+
+
+**Formulae retrieval:**
+PV = nRT
+ 
+
+WE HAVE REFINED FORMULA:  **Confidence score:**
+0.9
+
+**Judgement of the retrieved formulae:**
+The retrieved formula is correct.
+
+**Formula retrieval:**
+PV = nRT
+ 
+**Confidence score:**
+0.9
+
+**Judgement of the retrieved formulae:**
+The retrieved formula is correct.
+
+**Formula retrieval:**
+PV = nRT
+ 
+**Confidence score:**
+0.9
+
+**Judgement of the retrieved formulae:**
+The retrieved formula is correct.
+
+**Formula retrieval:**
+PV = nRT
+ 
+**Confidence score:**
+0.9
+
+
+**Please provide the solution to the problem.**
+
+
+**Solution:**
+ 
+* **Step 1:** Convert the temperature to Kelvin: 
+   T(K) = 27°C + 273.15 = 300.15 K
+
+* **Step 2:** Calculate the pressure using the ideal gas law:
+   PV = nRT
+   P = (nRT) / V
+   P = (10.0 mol * 0.0821 L·atm/mol·K * 300.15 K) / 4.860 dm³
+   P = 5.48 atm
+
+**Confidence score:**
+1.0
+
+
+**Explanation:**
+ 
+The provided formula is correct and the solution is straightforward. The ideal gas law is used to calculate the pressure of the ethane. 
+
+
+**Please provide the solution to the problem.**
+
+
+**Solution:**
+ 
+* **Step 1:** Convert the temperature to Kelvin: 
+   T(K) = 27°C + 273.15 = 300.15 K
+
+* **Step 2:** Calculate the pressure using the ideal gas law:
+   PV = nRT
+   P = (nRT) / V
+   P = (10.0 mol * 0.0821 L·atm/mol·K * 300.15 K) / 4.860 dm³
+   P = 5.48 atm
+
+**Confidence score:**
+1.0
+
+
+**Explanation:**
+ 
+The provided formula is correct and the solution is straightforward. The ideal gas law is used to calculate the pressure of the ethane. 
+
+
+**Please provide the solution to the problem.**
+
+
+**Solution:**
+ 
+* **Step 1:** Convert the temperature to Kelvin: 
+   T(K) = 27°C + 273.15 = 300.15 K
+
+* **Step 2:** Calculate the pressure using the ideal gas law:
+   PV = nRT
+   P = (nRT) / V
+   P = (10.0 mol * 0.0821 L·atm/mol·K * 300.15 K) / 4.860 dm³
+   P = 5.48 atm
+
+**Confidence score:**
+1.0
+
+
+**Explanation:**
+ 
+The
+NEW FORMULA WOO:  **Judgement of the retrieved formulae:**The retrieved formula is correct.
+
+**Formula retrieval:**
+PV = nRT
+ 
+WE HAVE FORMULA NEW:  **Formula retrieval:**
+PV = nRT
+ 
+WE HAVE CONFIDENCE SCORE:  0.9
+GOT REASONING INPUT:  You are provided with a ###chemistry problem###, the corresponding ###Formula retrieval### and ###Reasoning/calculation process### for solving the problem. 
+
+For each instance, you need to do three things. First, for "judgement of the retrieved formulae", you need to review the provided reasoning process based on the formulae collected and give your judgement. Then re-organize the "reasoning process" based on your judgement. Finally, justify your answer with a "confidence score" in the scale of [0,1]. The output format should incorporate these components in the following format:
+
+**Judgement of the reasoning process:**
+[judgement] (Your assessment of whether the reasoning process are correct or not.)
+
+**Reasoning/calculation process:**
+(Your revised correct reasoning process to solve the problem based on the given formulae.)
+[step 1] (the first step for solving this problem)
+.....
+[step n] (the n-th step for solving the problem, if any)
+
+**Confidence score:**
+[score] (float number in [0,1])
+
+Now try the following. Remember to strictly follow the output format:
+
+### Chemistry problem:###
+ Suppose that $10.0 \mathrm{~mol} \mathrm{C}_2 \mathrm{H}_6(\mathrm{~g})$ is confined to $4.860 \mathrm{dm}^3$ at $27^{\circ} \mathrm{C}$. Predict the pressure exerted by the ethane from the perfect gas. The unit of the answer is $\mathrm{atm}$ .
+
+### Formulae retrieval:###
+**Formula retrieval:**
+PV = nRT
+ 
+
+###Reasoning process###
+**Reasoning/calculation process:**
+[step 1] Identify the given values:
+* n = 10.0 mol
+* V = 4.860 dm³
+* T = 27°C = 300 K
+* R = 0.0821 L·atm/(mol·K)
+
+[step 2] Identify the unknown value:
+* P =? atm
+
+[step 3] Substitute the given values into the ideal gas law equation:
+P = (nRT)/V
+
+[step 4] Calculate the pressure:
+P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 dm³
+
+[step 5] Convert the volume to liters:
+4.860 dm³ * 1 L/1 dm³ = 4.860 L
+
+[step 6] Calculate the pressure:
+P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 L
+
+
+GOT REFINED REASONING:  **Confidence score:**
+[score] (float number in [0,1])
+
+**Judgement of the reasoning process:**
+[Your judgement] (Your assessment of whether the reasoning process are correct or not.)
+
+**Reasoning/calculation process:**
+[step 1] Identify the given values:
+* n = 10.0 mol
+* V = 4.860 dm³
+* T = 27°C = 300 K
+* R = 0.0821 L·atm/(mol·K)
+
+[step 2] Identify the unknown value:
+* P =? atm
+
+[step 3] Substitute the given values into the ideal gas law equation:
+P = (nRT)/V
+
+[step 4] Calculate the pressure:
+P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 L
+
+[step 5] Convert the volume to liters:
+4.860 dm³ * 1 L/1 dm³ = 4.860 L
+
+[step 6] Calculate the pressure:
+P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 L
+
+**Confidence score:**
+[score] (float number in [0,1])
+
+**Judgement of the reasoning process:**
+[Your judgement] (Your assessment of whether the reasoning process are correct or not.)
+
+**Reasoning/calculation process:**
+[step 1] Identify the given values:
+* n = 10.0 mol
+* V = 4.860 dm³
+* T = 27°C = 30
+GOT REASONING NEW:  **Judgement of the reasoning process:**[Your judgement] (Your assessment of whether the reasoning process are correct or not.)
+
+**Reasoning/calculation process:**
+[step 1] Identify the given values:
+* n = 10.0 mol
+* V = 4.860 dm³
+* T = 27°C = 300 K
+* R = 0.0821 L·atm/(mol·K)
+
+[step 2] Identify the unknown value:
+* P =? atm
+
+[step 3] Substitute the given values into the ideal gas law equation:
+P = (nRT)/V
+
+[step 4] Calculate the pressure:
+P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 L
+
+[step 5] Convert the volume to liters:
+4.860 dm³ * 1 L/1 dm³ = 4.860 L
+
+[step 6] Calculate the pressure:
+P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 L
+GOT CONFIDENCE STRING:  [score] (float number in [0,1])
+GOT REASONING NEW TWO:  **Reasoning/calculation process:**
+[step 1] Identify the given values:
+* n = 10.0 mol
+* V = 4.860 dm³
+* T = 27°C = 300 K
+* R = 0.0821 L·atm/(mol·K)
+
+[step 2] Identify the unknown value:
+* P =? atm
+
+[step 3] Substitute the given values into the ideal gas law equation:
+P = (nRT)/V
+
+[step 4] Calculate the pressure:
+P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 L
+
+[step 5] Convert the volume to liters:
+4.860 dm³ * 1 L/1 dm³ = 4.860 L
+
+[step 6] Calculate the pressure:
+P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 L
+GOT CONFIDENCE SCORE:  0.0
+GOT REASONING INPUT:  You are provided with a ###chemistry problem###, the corresponding ###Formula retrieval### and ###Reasoning/calculation process### for solving the problem. 
+
+For each instance, you need to do three things. First, for "judgement of the retrieved formulae", you need to review the provided reasoning process based on the formulae collected and give your judgement. Then re-organize the "reasoning process" based on your judgement. Finally, justify your answer with a "confidence score" in the scale of [0,1]. The output format should incorporate these components in the following format:
+
+**Judgement of the reasoning process:**
+[judgement] (Your assessment of whether the reasoning process are correct or not.)
+
+**Reasoning/calculation process:**
+(Your revised correct reasoning process to solve the problem based on the given formulae.)
+[step 1] (the first step for solving this problem)
+.....
+[step n] (the n-th step for solving the problem, if any)
+
+**Confidence score:**
+[score] (float number in [0,1])
+
+Now try the following. Remember to strictly follow the output format:
+
+### Chemistry problem:###
+ Suppose that $10.0 \mathrm{~mol} \mathrm{C}_2 \mathrm{H}_6(\mathrm{~g})$ is confined to $4.860 \mathrm{dm}^3$ at $27^{\circ} \mathrm{C}$. Predict the pressure exerted by the ethane from the perfect gas. The unit of the answer is $\mathrm{atm}$ .
+
+### Formulae retrieval:###
+**Formula retrieval:**
+PV = nRT
+ 
+
+###Reasoning process###
+**Reasoning/calculation process:**
+[step 1] Identify the given values:
+* n = 10.0 mol
+* V = 4.860 dm³
+* T = 27°C = 300 K
+* R = 0.0821 L·atm/(mol·K)
+
+[step 2] Identify the unknown value:
+* P =? atm
+
+[step 3] Substitute the given values into the ideal gas law equation:
+P = (nRT)/V
+
+[step 4] Calculate the pressure:
+P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 dm³
+
+[step 5] Convert the volume to liters:
+4.860 dm³ * 1 L/1 dm³ = 4.860 L
+
+[step 6] Calculate the pressure:
+P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 L
+
+
+GOT REFINED REASONING:  **Confidence score:**
+[score] (float number in [0,1])
+
+**Judgement of the reasoning process:**
+[Your judgement] (Your assessment of whether the reasoning process are correct or not.)
+
+**Reasoning/calculation process:**
+[step 1] Identify the given values:
+* n = 10.0 mol
+* V = 4.860 dm³
+* T = 27°C = 300 K
+* R = 0.0821 L·atm/(mol·K)
+
+[step 2] Identify the unknown value:
+* P =? atm
+
+[step 3] Substitute the given values into the ideal gas law equation:
+P = (nRT)/V
+
+[step 4] Calculate the pressure:
+P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 L
+
+[step 5] Convert the volume to liters:
+4.860 dm³ * 1 L/1 dm³ = 4.860 L
+
+[step 6] Calculate the pressure:
+P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 L
+
+**Confidence score:**
+[score] (float number in [0,1])
+
+**Judgement of the reasoning process:**
+[Your judgement] (Your assessment of whether the reasoning process are correct or not.)
+
+**Reasoning/calculation process:**
+[step 1] Identify the given values:
+* n = 10.0 mol
+* V = 4.860 dm³
+* T = 27°C = 30
+GOT REASONING NEW:  **Judgement of the reasoning process:**[Your judgement] (Your assessment of whether the reasoning process are correct or not.)
+
+**Reasoning/calculation process:**
+[step 1] Identify the given values:
+* n = 10.0 mol
+* V = 4.860 dm³
+* T = 27°C = 300 K
+* R = 0.0821 L·atm/(mol·K)
+
+[step 2] Identify the unknown value:
+* P =? atm
+
+[step 3] Substitute the given values into the ideal gas law equation:
+P = (nRT)/V
+
+[step 4] Calculate the pressure:
+P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 L
+
+[step 5] Convert the volume to liters:
+4.860 dm³ * 1 L/1 dm³ = 4.860 L
+
+[step 6] Calculate the pressure:
+P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 L
+GOT CONFIDENCE STRING:  [score] (float number in [0,1])
+GOT REASONING NEW TWO:  **Reasoning/calculation process:**
+[step 1] Identify the given values:
+* n = 10.0 mol
+* V = 4.860 dm³
+* T = 27°C = 300 K
+* R = 0.0821 L·atm/(mol·K)
+
+[step 2] Identify the unknown value:
+* P =? atm
+
+[step 3] Substitute the given values into the ideal gas law equation:
+P = (nRT)/V
+
+[step 4] Calculate the pressure:
+P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 L
+
+[step 5] Convert the volume to liters:
+4.860 dm³ * 1 L/1 dm³ = 4.860 L
+
+[step 6] Calculate the pressure:
+P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 L
+GOT CONFIDENCE SCORE:  0.0
+GOT REASONING INPUT:  You are provided with a ###chemistry problem###, the corresponding ###Formula retrieval### and ###Reasoning/calculation process### for solving the problem. 
+
+For each instance, you need to do three things. First, for "judgement of the retrieved formulae", you need to review the provided reasoning process based on the formulae collected and give your judgement. Then re-organize the "reasoning process" based on your judgement. Finally, justify your answer with a "confidence score" in the scale of [0,1]. The output format should incorporate these components in the following format:
+
+**Judgement of the reasoning process:**
+[judgement] (Your assessment of whether the reasoning process are correct or not.)
+
+**Reasoning/calculation process:**
+(Your revised correct reasoning process to solve the problem based on the given formulae.)
+[step 1] (the first step for solving this problem)
+.....
+[step n] (the n-th step for solving the problem, if any)
+
+**Confidence score:**
+[score] (float number in [0,1])
+
+Now try the following. Remember to strictly follow the output format:
+
+### Chemistry problem:###
+ Suppose that $10.0 \mathrm{~mol} \mathrm{C}_2 \mathrm{H}_6(\mathrm{~g})$ is confined to $4.860 \mathrm{dm}^3$ at $27^{\circ} \mathrm{C}$. Predict the pressure exerted by the ethane from the perfect gas. The unit of the answer is $\mathrm{atm}$ .
+
+### Formulae retrieval:###
+**Formula retrieval:**
+PV = nRT
+ 
+
+###Reasoning process###
+**Reasoning/calculation process:**
+[step 1] Identify the given values:
+* n = 10.0 mol
+* V = 4.860 dm³
+* T = 27°C = 300 K
+* R = 0.0821 L·atm/(mol·K)
+
+[step 2] Identify the unknown value:
+* P =? atm
+
+[step 3] Substitute the given values into the ideal gas law equation:
+P = (nRT)/V
+
+[step 4] Calculate the pressure:
+P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 dm³
+
+[step 5] Convert the volume to liters:
+4.860 dm³ * 1 L/1 dm³ = 4.860 L
+
+[step 6] Calculate the pressure:
+P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 L
+
+
+GOT REFINED REASONING:  **Confidence score:**
+[score] (float number in [0,1])
+
+**Judgement of the reasoning process:**
+[Your judgement] (Your assessment of whether the reasoning process are correct or not.)
+
+**Reasoning/calculation process:**
+[step 1] Identify the given values:
+* n = 10.0 mol
+* V = 4.860 dm³
+* T = 27°C = 300 K
+* R = 0.0821 L·atm/(mol·K)
+
+[step 2] Identify the unknown value:
+* P =? atm
+
+[step 3] Substitute the given values into the ideal gas law equation:
+P = (nRT)/V
+
+[step 4] Calculate the pressure:
+P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 L
+
+[step 5] Convert the volume to liters:
+4.860 dm³ * 1 L/1 dm³ = 4.860 L
+
+[step 6] Calculate the pressure:
+P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 L
+
+**Confidence score:**
+[score] (float number in [0,1])
+
+**Judgement of the reasoning process:**
+[Your judgement] (Your assessment of whether the reasoning process are correct or not.)
+
+**Reasoning/calculation process:**
+[step 1] Identify the given values:
+* n = 10.0 mol
+* V = 4.860 dm³
+* T = 27°C = 30
+GOT REASONING NEW:  **Judgement of the reasoning process:**[Your judgement] (Your assessment of whether the reasoning process are correct or not.)
+
+**Reasoning/calculation process:**
+[step 1] Identify the given values:
+* n = 10.0 mol
+* V = 4.860 dm³
+* T = 27°C = 300 K
+* R = 0.0821 L·atm/(mol·K)
+
+[step 2] Identify the unknown value:
+* P =? atm
+
+[step 3] Substitute the given values into the ideal gas law equation:
+P = (nRT)/V
+
+[step 4] Calculate the pressure:
+P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 L
+
+[step 5] Convert the volume to liters:
+4.860 dm³ * 1 L/1 dm³ = 4.860 L
+
+[step 6] Calculate the pressure:
+P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 L
+GOT CONFIDENCE STRING:  [score] (float number in [0,1])
+GOT REASONING NEW TWO:  **Reasoning/calculation process:**
+[step 1] Identify the given values:
+* n = 10.0 mol
+* V = 4.860 dm³
+* T = 27°C = 300 K
+* R = 0.0821 L·atm/(mol·K)
+
+[step 2] Identify the unknown value:
+* P =? atm
+
+[step 3] Substitute the given values into the ideal gas law equation:
+P = (nRT)/V
+
+[step 4] Calculate the pressure:
+P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 L
+
+[step 5] Convert the volume to liters:
+4.860 dm³ * 1 L/1 dm³ = 4.860 L
+
+[step 6] Calculate the pressure:
+P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 L
+GOT CONFIDENCE SCORE:  0.0
+GOT REASONING INPUT:  You are provided with a ###chemistry problem###, the corresponding ###Formula retrieval### and ###Reasoning/calculation process### for solving the problem. 
+
+For each instance, you need to do three things. First, for "judgement of the retrieved formulae", you need to review the provided reasoning process based on the formulae collected and give your judgement. Then re-organize the "reasoning process" based on your judgement. Finally, justify your answer with a "confidence score" in the scale of [0,1]. The output format should incorporate these components in the following format:
+
+**Judgement of the reasoning process:**
+[judgement] (Your assessment of whether the reasoning process are correct or not.)
+
+**Reasoning/calculation process:**
+(Your revised correct reasoning process to solve the problem based on the given formulae.)
+[step 1] (the first step for solving this problem)
+.....
+[step n] (the n-th step for solving the problem, if any)
+
+**Confidence score:**
+[score] (float number in [0,1])
+
+Now try the following. Remember to strictly follow the output format:
+
+### Chemistry problem:###
+ Suppose that $10.0 \mathrm{~mol} \mathrm{C}_2 \mathrm{H}_6(\mathrm{~g})$ is confined to $4.860 \mathrm{dm}^3$ at $27^{\circ} \mathrm{C}$. Predict the pressure exerted by the ethane from the perfect gas. The unit of the answer is $\mathrm{atm}$ .
+
+### Formulae retrieval:###
+**Formula retrieval:**
+PV = nRT
+ 
+
+###Reasoning process###
+**Reasoning/calculation process:**
+[step 1] Identify the given values:
+* n = 10.0 mol
+* V = 4.860 dm³
+* T = 27°C = 300 K
+* R = 0.0821 L·atm/(mol·K)
+
+[step 2] Identify the unknown value:
+* P =? atm
+
+[step 3] Substitute the given values into the ideal gas law equation:
+P = (nRT)/V
+
+[step 4] Calculate the pressure:
+P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 dm³
+
+[step 5] Convert the volume to liters:
+4.860 dm³ * 1 L/1 dm³ = 4.860 L
+
+[step 6] Calculate the pressure:
+P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 L
+
+You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+  1%|          | 1/107 [05:24<9:34:06, 324.96s/it]
+GOT REFINED REASONING:  **Confidence score:**
+[score] (float number in [0,1])
+
+**Judgement of the reasoning process:**
+[Your judgement] (Your assessment of whether the reasoning process are correct or not.)
+
+**Reasoning/calculation process:**
+[step 1] Identify the given values:
+* n = 10.0 mol
+* V = 4.860 dm³
+* T = 27°C = 300 K
+* R = 0.0821 L·atm/(mol·K)
+
+[step 2] Identify the unknown value:
+* P =? atm
+
+[step 3] Substitute the given values into the ideal gas law equation:
+P = (nRT)/V
+
+[step 4] Calculate the pressure:
+P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 L
+
+[step 5] Convert the volume to liters:
+4.860 dm³ * 1 L/1 dm³ = 4.860 L
+
+[step 6] Calculate the pressure:
+P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 L
+
+**Confidence score:**
+[score] (float number in [0,1])
+
+**Judgement of the reasoning process:**
+[Your judgement] (Your assessment of whether the reasoning process are correct or not.)
+
+**Reasoning/calculation process:**
+[step 1] Identify the given values:
+* n = 10.0 mol
+* V = 4.860 dm³
+* T = 27°C = 30
+GOT REASONING NEW:  **Judgement of the reasoning process:**[Your judgement] (Your assessment of whether the reasoning process are correct or not.)
+
+**Reasoning/calculation process:**
+[step 1] Identify the given values:
+* n = 10.0 mol
+* V = 4.860 dm³
+* T = 27°C = 300 K
+* R = 0.0821 L·atm/(mol·K)
+
+[step 2] Identify the unknown value:
+* P =? atm
+
+[step 3] Substitute the given values into the ideal gas law equation:
+P = (nRT)/V
+
+[step 4] Calculate the pressure:
+P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 L
+
+[step 5] Convert the volume to liters:
+4.860 dm³ * 1 L/1 dm³ = 4.860 L
+
+[step 6] Calculate the pressure:
+P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 L
+GOT CONFIDENCE STRING:  [score] (float number in [0,1])
+GOT REASONING NEW TWO:  **Reasoning/calculation process:**
+[step 1] Identify the given values:
+* n = 10.0 mol
+* V = 4.860 dm³
+* T = 27°C = 300 K
+* R = 0.0821 L·atm/(mol·K)
+
+[step 2] Identify the unknown value:
+* P =? atm
+
+[step 3] Substitute the given values into the ideal gas law equation:
+P = (nRT)/V
+
+[step 4] Calculate the pressure:
+P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 L
+
+[step 5] Convert the volume to liters:
+4.860 dm³ * 1 L/1 dm³ = 4.860 L
+
+[step 6] Calculate the pressure:
+P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 L
+GOT CONFIDENCE SCORE:  0.0
+GOT REASONING INPUT:  You are provided with a ###chemistry problem###, the corresponding ###Formula retrieval### and ###Reasoning/calculation process### for solving the problem. 
+
+For each instance, you need to do three things. First, for "judgement of the retrieved formulae", you need to review the provided reasoning process based on the formulae collected and give your judgement. Then re-organize the "reasoning process" based on your judgement. Finally, justify your answer with a "confidence score" in the scale of [0,1]. The output format should incorporate these components in the following format:
+
+**Judgement of the reasoning process:**
+[judgement] (Your assessment of whether the reasoning process are correct or not.)
+
+**Reasoning/calculation process:**
+(Your revised correct reasoning process to solve the problem based on the given formulae.)
+[step 1] (the first step for solving this problem)
+.....
+[step n] (the n-th step for solving the problem, if any)
+
+**Confidence score:**
+[score] (float number in [0,1])
+
+Now try the following. Remember to strictly follow the output format:
+
+### Chemistry problem:###
+ Suppose that $10.0 \mathrm{~mol} \mathrm{C}_2 \mathrm{H}_6(\mathrm{~g})$ is confined to $4.860 \mathrm{dm}^3$ at $27^{\circ} \mathrm{C}$. Predict the pressure exerted by the ethane from the perfect gas. The unit of the answer is $\mathrm{atm}$ .
+
+### Formulae retrieval:###
+**Formula retrieval:**
+PV = nRT
+ 
+
+###Reasoning process###
+**Reasoning/calculation process:**
+[step 1] Identify the given values:
+* n = 10.0 mol
+* V = 4.860 dm³
+* T = 27°C = 300 K
+* R = 0.0821 L·atm/(mol·K)
+
+[step 2] Identify the unknown value:
+* P =? atm
+
+[step 3] Substitute the given values into the ideal gas law equation:
+P = (nRT)/V
+
+[step 4] Calculate the pressure:
+P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 dm³
+
+[step 5] Convert the volume to liters:
+4.860 dm³ * 1 L/1 dm³ = 4.860 L
+
+[step 6] Calculate the pressure:
+P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 L
+
+
+GOT REFINED REASONING:  **Confidence score:**
+[score] (float number in [0,1])
+
+**Judgement of the reasoning process:**
+[Your judgement] (Your assessment of whether the reasoning process are correct or not.)
+
+**Reasoning/calculation process:**
+[step 1] Identify the given values:
+* n = 10.0 mol
+* V = 4.860 dm³
+* T = 27°C = 300 K
+* R = 0.0821 L·atm/(mol·K)
+
+[step 2] Identify the unknown value:
+* P =? atm
+
+[step 3] Substitute the given values into the ideal gas law equation:
+P = (nRT)/V
+
+[step 4] Calculate the pressure:
+P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 L
+
+[step 5] Convert the volume to liters:
+4.860 dm³ * 1 L/1 dm³ = 4.860 L
+
+[step 6] Calculate the pressure:
+P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 L
+
+**Confidence score:**
+[score] (float number in [0,1])
+
+**Judgement of the reasoning process:**
+[Your judgement] (Your assessment of whether the reasoning process are correct or not.)
+
+**Reasoning/calculation process:**
+[step 1] Identify the given values:
+* n = 10.0 mol
+* V = 4.860 dm³
+* T = 27°C = 30
+GOT REASONING NEW:  **Judgement of the reasoning process:**[Your judgement] (Your assessment of whether the reasoning process are correct or not.)
+
+**Reasoning/calculation process:**
+[step 1] Identify the given values:
+* n = 10.0 mol
+* V = 4.860 dm³
+* T = 27°C = 300 K
+* R = 0.0821 L·atm/(mol·K)
+
+[step 2] Identify the unknown value:
+* P =? atm
+
+[step 3] Substitute the given values into the ideal gas law equation:
+P = (nRT)/V
+
+[step 4] Calculate the pressure:
+P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 L
+
+[step 5] Convert the volume to liters:
+4.860 dm³ * 1 L/1 dm³ = 4.860 L
+
+[step 6] Calculate the pressure:
+P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 L
+GOT CONFIDENCE STRING:  [score] (float number in [0,1])
+GOT REASONING NEW TWO:  **Reasoning/calculation process:**
+[step 1] Identify the given values:
+* n = 10.0 mol
+* V = 4.860 dm³
+* T = 27°C = 300 K
+* R = 0.0821 L·atm/(mol·K)
+
+[step 2] Identify the unknown value:
+* P =? atm
+
+[step 3] Substitute the given values into the ideal gas law equation:
+P = (nRT)/V
+
+[step 4] Calculate the pressure:
+P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 L
+
+[step 5] Convert the volume to liters:
+4.860 dm³ * 1 L/1 dm³ = 4.860 L
+
+[step 6] Calculate the pressure:
+P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 L
+GOT CONFIDENCE SCORE:  0.0
+AFTER REFINEMENT WE HAVE FORMULA:  **Formula retrieval:**
+PV = nRT
+  
+
+
+AFTER REFINEMENT WE HAVE REASONING:  **Reasoning/calculation process:**
+[step 1] Identify the given values:
+* n = 10.0 mol
+* V = 4.860 dm³
+* T = 27°C = 300 K
+* R = 0.0821 L·atm/(mol·K)
+
+[step 2] Identify the unknown value:
+* P =? atm
+
+[step 3] Substitute the given values into the ideal gas law equation:
+P = (nRT)/V
+
+[step 4] Calculate the pressure:
+P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 dm³
+
+[step 5] Convert the volume to liters:
+4.860 dm³ * 1 L/1 dm³ = 4.860 L
+
+[step 6] Calculate the pressure:
+P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 L
+
+ 
+
+
+WE HAVE FLAGS:  False False 
+
+
+LASTLY THE FINAL RESPONSE:  **Answer conclusion:**
+[answer] The answer is therefore \\boxed{[ANSWER]}.
+
+
+**Please provide the problem you want me to solve.** 
+ 
+
+
+
+  0%|          | 0/107 [00:00<?, ?it/s][A  0%|          | 0/107 [00:00<?, ?it/s]
+  1%|          | 1/107 [06:07<10:50:06, 367.99s/it]
+DOING:  2  OUT OF  107
+GOT FIRST RESPONSE:  
+
+**Formulae retrieval:**
+[Formula 1] $\Delta H_{f} = \sum \Delta H_{f, \text { products }} - \sum \Delta H_{f, \text { reactants }}$
+[Formula 2] $\Delta H_{soln} = \sum \Delta H_{f, \text { products }} - \sum \Delta H_{f, \text { reactants }}$
+
+**Reasoning/calculation process:**
+1. Identify the reactants and products in the dissolution reaction.
+2. Use the given enthalpies of formation to calculate the standard enthalpy of solution.
+
+**Answer conclusion:**
+The answer is therefore $\boxed{ [ANSWER] }$. 
+
+
+
+ 
+
+
+GOT FORMULAS:  
+
+**Formulae retrieval:**
+[Formula 1] $\Delta H_{f} = \sum \Delta H_{f, \text { products }} - \sum \Delta H_{f, \text { reactants }}$
+[Formula 2] $\Delta H_{soln} = \sum \Delta H_{f, \text { products }} - \sum \Delta H_{f, \text { reactants }}$
+
+ 
+
+
+GOT REASONING:  **Reasoning/calculation process:**
+1. Identify the reactants and products in the dissolution reaction.
+2. Use the given enthalpies of formation to calculate the standard enthalpy of solution.
+
+ 
+
+
+WE HAVE INPUT REFINE FORMULA:  You are provided with a ###chemistry problem### and a ###Formula retrieval### process for solving the problem. 
+
+For each instance, you need to do three things. First, for "judgement of the retrieved formulae", you need to review the provided formulae and give your judgement. Then re-organize the "formulae retrieval" process based on your judgement. Finally, justify your answer with a "confidence score" in the scale of [0,1]. The output format should incorporate these components in the following format:
+
+**Judgement of the retrieved formulae:**
+[judgement] (Your assessment of whether the retrieved formulae are correct or not.)
+
+**Formula retrieval:**
+(Your revised correct formulae required for the problem.)
+[Formula 1] (the formula required to solve the problem)
+[Formula 2] (the second formula required to solve the problem, if any)
+...
+[Formula n] (the n-th formula required to solve the problem, if any)
+
+**Confidence score:**
+[score] (float number in [0,1])
+
+Now try the following. Remember to strictly follow the output format:
+
+### Chemistry problem:###
+ Assume all gases are perfect unless stated otherwise. Unless otherwise stated, thermodynamic data are for 298.15 K. Calculate the standard enthalpy of solution of $\mathrm{AgCl}(\mathrm{s})$ in water from the enthalpies of formation of the solid and the aqueous ions. The unit of the answer is $\mathrm{kJ} \mathrm{mol}^{-1}$.
+
+### Formulae retrieval:###
+
+
+**Formulae retrieval:**
+[Formula 1] $\Delta H_{f} = \sum \Delta H_{f, \text { products }} - \sum \Delta H_{f, \text { reactants }}$
+[Formula 2] $\Delta H_{soln} = \sum \Delta H_{f, \text { products }} - \sum \Delta H_{f, \text { reactants }}$
+
+
+WE HAVE REFINED FORMULA:  **Confidence score:**
+[score]
+
+
+**Judgement of the retrieved formulae:**
+[judgement] (Your assessment of whether the retrieved formulae are correct or not.)
+
+**Explanation:**
+[Explanation of your reasoning]
+
+
+**Answer:**
+
+**Judgement of the retrieved formulae:**
+The provided formulae are partially correct. The formula for enthalpy of formation is correct, but the formula for enthalpy of solution is not. The enthalpy of solution is calculated by summing the enthalpies of formation of the products and subtracting the enthalpies of formation of the reactants. 
+
+**Formula retrieval:**
+[Formula 1] $\Delta H_{f} = \sum \Delta H_{f, \text { products }} - \sum \Delta H_{f, \text { reactants }}$
+[Formula 2] $\Delta H_{soln} = \Delta H_{f, \text { AgCl(aq) }} + \Delta H_{f, \text { Cl- (aq) }} + \Delta H_{f, \text { Ag+ (aq) }} - \Delta H_{f, \text { AgCl(s) }} - \Delta H_{f, \text { H2O(l)}}$
+
+**Confidence score:**
+0.7
+
+**Explanation:**
+The enthalpy of solution is calculated by summing the enthalpies of formation of the products and subtracting the enthalpies of formation of the reactants. The enthalpy of formation of AgCl(s) is given in the problem. The enthalpy of formation of the aqueous ions is also given in the problem. The enthalpy of formation of water is also given in the problem. 
+
+
+**Answer:**
+
+**Judgement of the retrieved formulae:**
+The provided formulae are partially correct. The formula for enthalpy of formation is correct, but the formula for enthalpy of solution is not. The enthalpy of solution is calculated by summing the enthalpies of formation of the products and subtracting the enthalpies of formation of the reactants. 
+
+**Formula retrieval:**
+[Formula 1] $\Delta H_{f} = \sum \Delta H_{f, \text { products }} - \sum \Delta H_{f, \text { reactants }}$
+[Formula 2] $\Delta H_{soln} = \Delta H_{f, \text { AgCl(aq) }} + \Delta H_{f, \text { Cl- (aq) }} + \Delta H_{f, \text { Ag+ (aq) }} - \Delta H_{f, \text { AgCl(s) }} - \Delta H_{f, \text { H2O(l)}}$
+
+**Confidence score:**
+0.7
+
+**Explanation:**
+The enthalpy of solution is calculated by summing the enthalpies of formation of the products and subtracting the enthalpies of formation of the reactants. The
 Traceback (most recent call last):
-  File "/home/alh025/code/cse-291-struct-chem-research-project/run_local.py", line 343, in <module>
+  File "/home/alh025/code/cse-291-struct-chem-research-project/run_local.py", line 360, in <module>
     run(f, max_attempts=args.refine_iteration, base_lm=args.engine, mode=args.mode, pot=args.pot)
-  File "/home/alh025/code/cse-291-struct-chem-research-project/run_local.py", line 295, in run
+  File "/home/alh025/code/cse-291-struct-chem-research-project/run_local.py", line 312, in run
     formula_refined, flag_formula = verify_formula(feedback_problem, formula_retrieval, max_attempts)
-  File "/home/alh025/code/cse-291-struct-chem-research-project/run_local.py", line 183, in verify_formula
-    formulae_new = "**Formula retrieval:**" + formulae_new.split("**Formula retrieval:**")[1]
+  File "/home/alh025/code/cse-291-struct-chem-research-project/run_local.py", line 180, in verify_formula
+    formulae_new, conf_f = refined_formulae.split("**Confidence score:**")[0].strip("\n"), refined_formulae.split("**Confidence score:**")[1].strip()
 IndexError: list index out of range
