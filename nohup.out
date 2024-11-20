@@ -10,7 +10,7 @@ True
 /home/alh025/.cache/huggingface/hub/models--google--gemma-2-2b-it/snapshots/299a8560bedf22ed1c72a8a11e7dce4a7f9f51f8/tokenizer.json
 /home/alh025/.cache/huggingface/hub/models--google--gemma-2-2b-it/snapshots/299a8560bedf22ed1c72a8a11e7dce4a7f9f51f8/tokenizer.model
 /home/alh025/.cache/huggingface/hub/models--google--gemma-2-2b-it/snapshots/299a8560bedf22ed1c72a8a11e7dce4a7f9f51f8/tokenizer_config.json
-Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:07<00:07,  7.62s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:08<00:00,  3.94s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:08<00:00,  4.49s/it]
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:23<00:23, 23.93s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:25<00:00, 10.65s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:25<00:00, 12.64s/it]
   0%|          | 0/107 [00:00<?, ?it/s]
   0%|          | 0/107 [00:00<?, ?it/s][A  0%|          | 0/107 [00:00<?, ?it/s]
 DOING:  1  OUT OF  107
@@ -209,6 +209,14 @@ The provided formula is correct and the solution is straightforward. The ideal g
 **Explanation:**
  
 The
+DEBUG:  **Judgement of the retrieved formulae:**The retrieved formula is correct.
+
+**Formula retrieval:**
+PV = nRT
+ 
+**Confidence score:**
+0.9
+SPLIT:  2
 NEW FORMULA WOO:  **Judgement of the retrieved formulae:**The retrieved formula is correct.
 
 **Formula retrieval:**
@@ -345,6 +353,14 @@ The provided formula is correct and the solution is straightforward. The ideal g
 **Explanation:**
  
 The
+DEBUG:  **Judgement of the retrieved formulae:**The retrieved formula is correct.
+
+**Formula retrieval:**
+PV = nRT
+ 
+**Confidence score:**
+0.9
+SPLIT:  2
 NEW FORMULA WOO:  **Judgement of the retrieved formulae:**The retrieved formula is correct.
 
 **Formula retrieval:**
@@ -481,6 +497,14 @@ The provided formula is correct and the solution is straightforward. The ideal g
 **Explanation:**
  
 The
+DEBUG:  **Judgement of the retrieved formulae:**The retrieved formula is correct.
+
+**Formula retrieval:**
+PV = nRT
+ 
+**Confidence score:**
+0.9
+SPLIT:  2
 NEW FORMULA WOO:  **Judgement of the retrieved formulae:**The retrieved formula is correct.
 
 **Formula retrieval:**
@@ -617,6 +641,14 @@ The provided formula is correct and the solution is straightforward. The ideal g
 **Explanation:**
  
 The
+DEBUG:  **Judgement of the retrieved formulae:**The retrieved formula is correct.
+
+**Formula retrieval:**
+PV = nRT
+ 
+**Confidence score:**
+0.9
+SPLIT:  2
 NEW FORMULA WOO:  **Judgement of the retrieved formulae:**The retrieved formula is correct.
 
 **Formula retrieval:**
@@ -753,6 +785,14 @@ The provided formula is correct and the solution is straightforward. The ideal g
 **Explanation:**
  
 The
+DEBUG:  **Judgement of the retrieved formulae:**The retrieved formula is correct.
+
+**Formula retrieval:**
+PV = nRT
+ 
+**Confidence score:**
+0.9
+SPLIT:  2
 NEW FORMULA WOO:  **Judgement of the retrieved formulae:**The retrieved formula is correct.
 
 **Formula retrieval:**
@@ -1217,7 +1257,7 @@ P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 dm³
 P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 L
 
 You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-  1%|          | 1/107 [05:24<9:34:06, 324.96s/it]
+
 GOT REFINED REASONING:  **Confidence score:**
 [score] (float number in [0,1])
 
@@ -1471,6 +1511,39 @@ P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 L
 WE HAVE FLAGS:  False False 
 
 
+VERIFIED PROMPT:  Your task is to solve a chemical problem. For each instance, you will be given two sources of information: "formula retrieval" and "reasoning/calculation process".
+Your task is to conclude the final answer based on these information.
+The final output template is:
+
+**Answer conclusion:**
+[answer] The answer is therefore \\boxed{[ANSWER]}.
+
+Now try to conclude the answer for the following problem:
+**Formula retrieval:**
+PV = nRT
+ **Reasoning/calculation process:**
+[step 1] Identify the given values:
+* n = 10.0 mol
+* V = 4.860 dm³
+* T = 27°C = 300 K
+* R = 0.0821 L·atm/(mol·K)
+
+[step 2] Identify the unknown value:
+* P =? atm
+
+[step 3] Substitute the given values into the ideal gas law equation:
+P = (nRT)/V
+
+[step 4] Calculate the pressure:
+P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 dm³
+
+[step 5] Convert the volume to liters:
+4.860 dm³ * 1 L/1 dm³ = 4.860 L
+
+[step 6] Calculate the pressure:
+P = (10.0 mol * 0.0821 L·atm/(mol·K) * 300 K) / 4.860 L
+
+  1%|          | 1/107 [05:24<9:34:08, 324.99s/it]
 LASTLY THE FINAL RESPONSE:  **Answer conclusion:**
 [answer] The answer is therefore \\boxed{[ANSWER]}.
 
@@ -1481,7 +1554,7 @@ LASTLY THE FINAL RESPONSE:  **Answer conclusion:**
 
 
   0%|          | 0/107 [00:00<?, ?it/s][A  0%|          | 0/107 [00:00<?, ?it/s]
-  1%|          | 1/107 [06:07<10:50:06, 367.99s/it]
+  1%|          | 1/107 [06:08<10:50:19, 368.10s/it]
 DOING:  2  OUT OF  107
 GOT FIRST RESPONSE:  
 
@@ -1588,11 +1661,19 @@ The provided formulae are partially correct. The formula for enthalpy of formati
 
 **Explanation:**
 The enthalpy of solution is calculated by summing the enthalpies of formation of the products and subtracting the enthalpies of formation of the reactants. The
+DEBUG:  **Judgement of the retrieved formulae:**[judgement] (Your assessment of whether the retrieved formulae are correct or not.)
+
+**Explanation:**
+[Explanation of your reasoning]
+
+
+**Answer:**
+SPLIT:  1
 Traceback (most recent call last):
-  File "/home/alh025/code/cse-291-struct-chem-research-project/run_local.py", line 360, in <module>
+  File "/home/alh025/code/cse-291-struct-chem-research-project/run_local.py", line 363, in <module>
     run(f, max_attempts=args.refine_iteration, base_lm=args.engine, mode=args.mode, pot=args.pot)
-  File "/home/alh025/code/cse-291-struct-chem-research-project/run_local.py", line 312, in run
+  File "/home/alh025/code/cse-291-struct-chem-research-project/run_local.py", line 314, in run
     formula_refined, flag_formula = verify_formula(feedback_problem, formula_retrieval, max_attempts)
-  File "/home/alh025/code/cse-291-struct-chem-research-project/run_local.py", line 180, in verify_formula
-    formulae_new, conf_f = refined_formulae.split("**Confidence score:**")[0].strip("\n"), refined_formulae.split("**Confidence score:**")[1].strip()
+  File "/home/alh025/code/cse-291-struct-chem-research-project/run_local.py", line 182, in verify_formula
+    formulae_new, conf_f = refined_formulae.split('**Confidence score:**')[0].strip("\n"), refined_formulae.split('**Confidence score:**')[1].strip()
 IndexError: list index out of range
