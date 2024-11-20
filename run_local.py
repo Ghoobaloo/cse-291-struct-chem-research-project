@@ -172,16 +172,21 @@ def verify_formula(problem_statement: str, formulae: str, max_attempts: int) -> 
 
         refined_formulae = gpt.complete(model_input)
         
-        print('we have input refine formula: ', model_input)
-        print('we have refined formula: ', refined_formulae)
+        print('WE HAVE INPUT REFINE FORMULA: ', model_input)
+        print('WE HAVE REFINED FORMULA: ', refined_formulae)
+
+        refined_formulae = '**Judgement of the retrieved formulae:**' + refined_formulae.split('**Judgement of the retrieved formulae:**')[1].strip()
 
         formulae_new, conf_f = refined_formulae.split("**Confidence score:**")[0].strip("\n"), refined_formulae.split("**Confidence score:**")[1].strip()
+        conf_f = conf_f.splitlines()[0]
         
-        print('new formula woo: ', formulae_new)
+        print('NEW FORMULA WOO: ', formulae_new)
         # extract the confidence score and the refined components
         conf = float(re.findall(r"\d+\.?\d*", conf_f)[0])
         formulae_new = "**Formula retrieval:**" + formulae_new.split("**Formula retrieval:**")[1]
 
+        print('WE HAVE FORMULA NEW: ', formulae_new)
+        print('WE HAVE CONFIDENCE SCORE: ', conf)
 
         if conf > max_confidence:
             max_confidence = conf
@@ -225,11 +230,20 @@ def verify_reasoning(problem_statement: str, formula: str, reasoning: str, max_a
         
         refined_reasoning = gpt.complete(model_input)
 
+        print('GOT REASONING INPUT: ', model_input)
+        print('GOT REFINED REASONING: ', refined_reasoning)
+
         reasoning_new, conf_f = refined_reasoning.split("**Confidence score:**")[0].strip("\n"), refined_reasoning.split("**Confidence score:**")[1].strip()
+
+        print('GOT REASONING NEW: ', reasoning_new)
+        print('GOT CONFIDENCE STRING: ', conf_f)
 
         # extract the confidence score and the refined components
         conf = float(re.findall(r"\d+\.?\d*", conf_f)[0])
         reasoning_new = "**Reasoning/calculation process:**" + reasoning_new.split("**Reasoning/calculation process:**")[1]
+
+        print('GOT REASONING NEW TWO: ', reasoning_new)
+        print('GOT CONFIDENCE SCORE: ', conf)
 
         if conf > max_confidence:
             max_confidence = conf
