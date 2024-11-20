@@ -177,7 +177,9 @@ def verify_formula(problem_statement: str, formulae: str, max_attempts: int) -> 
 
         refined_formulae = '**Judgement of the retrieved formulae:**' + refined_formulae.split('**Judgement of the retrieved formulae:**')[1].strip()
 
-        formulae_new, conf_f = refined_formulae.split("**Confidence score:**")[0].strip("\n"), refined_formulae.split("**Confidence score:**")[1].strip()
+        print('DEBUG: ', refined_formulae)
+        print('SPLIT: ', len(refined_formulae.split('**Confidence score:**')))
+        formulae_new, conf_f = refined_formulae.split('**Confidence score:**')[0].strip("\n"), refined_formulae.split('**Confidence score:**')[1].strip()
         conf_f = conf_f.splitlines()[0]
         
         print('NEW FORMULA WOO: ', formulae_new)
@@ -322,6 +324,7 @@ def run(file, max_attempts, base_lm, mode, pot):
                 final_response = response
             else:
                 verified_prompt = load_prompt("./prompts/verified_instruction.txt")
+                print('VERIFIED PROMPT: ', verified_prompt+formula_refined+reasoning_refined)
                 final_response = gpt4.complete(prompt=verified_prompt+formula_refined+reasoning_refined)
         else:
             old_stdout = sys.stdout
