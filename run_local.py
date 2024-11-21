@@ -23,8 +23,11 @@ HUGGINGFACE_API_KEY = "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"
 #model_id = "google/gemma-2-2b-it"
 #filenames = ["config.json", "generation_config.json", "model-00001-of-00002.safetensors", "model-00002-of-00002.safetensors", "model.safetensors.index.json", "special_tokens_map.json", "tokenizer.json", "tokenizer.model", "tokenizer_config.json"]
 
-model_id = "google/gemma-2-9b-it"
-filenames = ["config.json", "generation_config.json", "model-00001-of-00004.safetensors", "model-00002-of-00004.safetensors", "model-00003-of-00004.safetensors", "model-00004-of-00004.safetensors", "model.safetensors.index.json", "special_tokens_map.json", "tokenizer.json", "tokenizer.model", "tokenizer_config.json"]
+#model_id = "google/gemma-2-9b-it"
+#filenames = ["config.json", "generation_config.json", "model-00001-of-00004.safetensors", "model-00002-of-00004.safetensors", "model-00003-of-00004.safetensors", "model-00004-of-00004.safetensors", "model.safetensors.index.json", "special_tokens_map.json", "tokenizer.json", "tokenizer.model", "tokenizer_config.json"]
+
+model_id = "google/gemma-2-9b-it-GGUF"
+filenames = ["config.json", "gemma-2-9b-it.Q4_1.gguf"]
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 print('Device: ', device)
