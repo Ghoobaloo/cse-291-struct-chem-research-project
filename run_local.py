@@ -15,8 +15,9 @@ import openai
 from openai import OpenAI
 from tqdm import tqdm
 import torch
-
+from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline, AutoModel
 from huggingface_hub import hf_hub_download
+import ollama
 
 HUGGINGFACE_API_KEY = "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"
 
@@ -26,8 +27,18 @@ HUGGINGFACE_API_KEY = "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"
 #model_id = "google/gemma-2-9b-it"
 #filenames = ["config.json", "generation_config.json", "model-00001-of-00004.safetensors", "model-00002-of-00004.safetensors", "model-00003-of-00004.safetensors", "model-00004-of-00004.safetensors", "model.safetensors.index.json", "special_tokens_map.json", "tokenizer.json", "tokenizer.model", "tokenizer_config.json"]
 
-model_id = "google/gemma-2-9b-it-GGUF"
-filenames = ["config.json", "gemma-2-9b-it.Q4_1.gguf"]
+#model_id_tok = model_id
+
+#model_id = "SanctumAI/gemma-2-9b-it-GGUF"
+#filenames = ["config.json", "gemma-2-9b-it.Q4_1.gguf"]
+#gguf_filename = "gemma-2-9b-it.Q4_K.gguf"
+#model_path = "SanctumAI/gemma"
+
+model_name = "hf.co/SanctumAI/gemma-2-9b-it-GGUF:Q4_K_M"
+#response = ollama.generate(model=model_name, options={'temperature': 0.0}, prompt="Give me a success score for this execution from 1 to 10. Respond with a single number")
+#print(response)
+#print(response['response'])
+
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 print('Device: ', device)
@@ -35,15 +46,14 @@ print(torch.cuda.is_available())  # Should return True
 print(torch.cuda.device_count())
 #print(refine_reasoning_prompt_pot)
 
-for filename in filenames:
-    downloaded_model_path = hf_hub_download(
-        repo_id = model_id,
-        filename = filename,
-        token = HUGGINGFACE_API_KEY
-    )
-    print(downloaded_model_path)
+#for filename in filenames:
+#    downloaded_model_path = hf_hub_download(
+#        repo_id = model_id,
+#        filename = filename,
+#        token = HUGGINGFACE_API_KEY
+#    )
+#    print(downloaded_model_path)
 
-from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 
 def load_prompt(file):
     prompt = ''
@@ -56,11 +66,17 @@ class HuggingFaceModel:
     
     def __init__(self, max_tokens=1024, temperature=0.0, logprobs=None, n=1, engine='gpt-4',
         frequency_penalty=0, presence_penalty=0, stop=None, rstrip=False, **kwargs):
+        
+        self.temperature = temperature
+        self.max_tokens = max_tokens
+        #for gguf attempt
+        #self.tokenizer = AutoTokenizer.from_pretrained(model_id, gguf_file=gguf_filename)
+        #self.model = AutoModelForCausalLM.from_pretrained(model_id, gguf_file=gguf_filename)
 
-        self.tokenizer = AutoTokenizer.from_pretrained(model_id)
-        self.model = AutoModelForCausalLM.from_pretrained(model_id)
+        #self.tokenizer = AutoTokenizer.from_pretrained(model_id)
+        #self.model = AutoModelForCausalLM.from_pretrained(model_id)
 
-        self.pipeline = pipeline("text-generation", model=self.model, device=device, do_sample=False, temperature=temperature, tokenizer=self.tokenizer, truncation=True, max_length=max_tokens)
+        #self.pipeline = pipeline("text-generation", model=self.model, device=device, do_sample=False, temperature=temperature, tokenizer=self.tokenizer, truncation=True, max_length=max_tokens)
 
     def complete(self, prompt):
 
@@ -72,14 +88,16 @@ class HuggingFaceModel:
         #not perfect, could use some work later
         message = "System: You are an expert chemist. Your expertise lies in reasoning and addressing chemistry problems. User: " + prompt
 
-        #print('STARTED GENERATION') 
+        print('STARTED GENERATION') 
         #print('the prompt is: ', message)
-        response = self.pipeline(message)
-        #print('response: ', response)
-        #print('response[0]: ' , response[0])
-        answer = response[0]['generated_text']
-        answer = answer[len(message):]
-        #print('ENDED GENERATION')
+        #response = self.pipeline(message)
+        #answer = response[0]['generated_text']
+        #answer = answer[len(message):]
+
+        response = ollama.generate(model=model_name, options={'temperature': 0.0}, prompt=message)
+        answer = response['response']
+
+        print('ENDED GENERATION')
         #print('got response: ', answer)
 
         return answer
