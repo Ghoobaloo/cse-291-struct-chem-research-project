@@ -17,7 +17,8 @@ from tqdm import tqdm
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline, AutoModel
 from huggingface_hub import hf_hub_download
-import ollama
+import ollama import chat
+from ollama import ChatResponse
 
 HUGGINGFACE_API_KEY = "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"
 
@@ -86,19 +87,22 @@ class HuggingFaceModel:
                      {"role": "user",
                       "content": prompt,}]
         #not perfect, could use some work later
-        message = "System: You are an expert chemist. Your expertise lies in reasoning and addressing chemistry problems. User: " + prompt
+        #message = "System: You are an expert chemist. Your expertise lies in reasoning and addressing chemistry problems. User: " + prompt
 
-        print('STARTED GENERATION') 
-        #print('the prompt is: ', message)
+        print('STARTED GENERATION')
+        print('the prompt is: ', messages)
         #response = self.pipeline(message)
         #answer = response[0]['generated_text']
         #answer = answer[len(message):]
 
-        response = ollama.generate(model=model_name, options={'temperature': 0.0}, prompt=message)
-        answer = response['response']
+        #response = ollama.generate(model=model_name, options={'temperature': 0.0}, prompt=message)
+        #answer = response['response']
+
+        response: ChatResponse = chat(model=model_name, options={'temperature': 0.0}, message=messages)
+        answer = response.message.content
 
         print('ENDED GENERATION')
-        #print('got response: ', answer)
+        print('got response: ', answer)
 
         return answer
 
@@ -184,41 +188,46 @@ def verify_formula(problem_statement: str, formulae: str, max_attempts: int) -> 
     max_confidence = 0.0
     
     while n_attempts < max_attempts:
+
+        try:
+            with io.StringIO() as f:
+                f.write(refine_formulae_prompt.strip() + "\n\n")
+                f.write("Now try the following. Remember to strictly follow the output format:\n\n")
+                f.write(f"### Chemistry problem:###\n {problem_statement}\n\n### Formulae retrieval:###\n{formulae_retrieved}")
+                model_input = f.getvalue()
+
+            refined_formulae = gpt.complete(model_input)
         
-        with io.StringIO() as f:
-            f.write(refine_formulae_prompt.strip() + "\n\n")
-            f.write("Now try the following. Remember to strictly follow the output format:\n\n")
-            f.write(f"### Chemistry problem:###\n {problem_statement}\n\n### Formulae retrieval:###\n{formulae_retrieved}")
-            model_input = f.getvalue()
+            print('WE HAVE INPUT REFINE FORMULA: ', model_input)
+            print('WE HAVE REFINED FORMULA: ', refined_formulae)
 
-        refined_formulae = gpt.complete(model_input)
+            refined_formulae = '**Judgement of the retrieved formulae:**' + refined_formulae.split('**Judgement of the retrieved formulae:**')[1].strip()
+
+            print('DEBUG: ', refined_formulae)
+            print('SPLIT: ', len(refined_formulae.split('**Confidence score:**')))
+
+            formulae_new, conf_f = refined_formulae.split('**Confidence score:**')[0].strip("\n"), refined_formulae.split('**Confidence score:**')[1].strip()
+            conf_f = conf_f.splitlines()[0]
         
-        print('WE HAVE INPUT REFINE FORMULA: ', model_input)
-        print('WE HAVE REFINED FORMULA: ', refined_formulae)
+            print('NEW FORMULA WOO: ', formulae_new)
+            # extract the confidence score and the refined components
+            conf = float(re.findall(r"\d+\.?\d*", conf_f)[0])
+            formulae_new = "**Formula retrieval:**" + formulae_new.split("**Formula retrieval:**")[1]
 
-        refined_formulae = '**Judgement of the retrieved formulae:**' + refined_formulae.split('**Judgement of the retrieved formulae:**')[1].strip()
+            print('WE HAVE FORMULA NEW: ', formulae_new)
+            print('WE HAVE CONFIDENCE SCORE: ', conf)
 
-        print('DEBUG: ', refined_formulae)
-        print('SPLIT: ', len(refined_formulae.split('**Confidence score:**')))
+            if conf > max_confidence:
+                max_confidence = conf
+                formulae = formulae_new
+            else:
+                formulae = formulae
 
-        formulae_new, conf_f = refined_formulae.split('**Confidence score:**')[0].strip("\n"), refined_formulae.split('**Confidence score:**')[1].strip()
-        conf_f = conf_f.splitlines()[0]
-        
-        print('NEW FORMULA WOO: ', formulae_new)
-        # extract the confidence score and the refined components
-        conf = float(re.findall(r"\d+\.?\d*", conf_f)[0])
-        formulae_new = "**Formula retrieval:**" + formulae_new.split("**Formula retrieval:**")[1]
+            n_attempts += 1
 
-        print('WE HAVE FORMULA NEW: ', formulae_new)
-        print('WE HAVE CONFIDENCE SCORE: ', conf)
-
-        if conf > max_confidence:
-            max_confidence = conf
-            formulae = formulae_new
-        else:
-            formulae = formulae
-
-        n_attempts += 1
+        except Exception as e:
+          print('EXCEPTION: ', e)
+          flag = False
 
     if n_attempts > 0 :
         flag = False
@@ -246,39 +255,45 @@ def verify_reasoning(problem_statement: str, formula: str, reasoning: str, max_a
 
     while n_attempts < max_attempts:
 
-        with io.StringIO() as f:
-            f.write(refine_reasoning_prompt.strip() + "\n\n")
-            f.write("Now try the following. Remember to strictly follow the output format:\n\n")
-            f.write(f"### Chemistry problem:###\n {problem_statement}\n\n### Formulae retrieval:###\n{formula}\n\n###Reasoning process###\n{reasoning}")
-            model_input = f.getvalue()
+        try:
+
+            with io.StringIO() as f:
+                f.write(refine_reasoning_prompt.strip() + "\n\n")
+                f.write("Now try the following. Remember to strictly follow the output format:\n\n")
+                f.write(f"### Chemistry problem:###\n {problem_statement}\n\n### Formulae retrieval:###\n{formula}\n\n###Reasoning process###\n{reasoning}")
+                model_input = f.getvalue()
         
-        refined_reasoning = gpt.complete(model_input)
+            refined_reasoning = gpt.complete(model_input)
 
-        print('GOT REASONING INPUT: ', model_input)
-        print('GOT REFINED REASONING: ', refined_reasoning)
+            print('GOT REASONING INPUT: ', model_input)
+            print('GOT REFINED REASONING: ', refined_reasoning)
 
-        refined_reasoning = '**Judgement of the reasoning process:**' + refined_reasoning.split('**Judgement of the reasoning process:**')[1].strip()
+            refined_reasoning = '**Judgement of the reasoning process:**' + refined_reasoning.split('**Judgement of the reasoning process:**')[1].strip()
 
-        reasoning_new, conf_f = refined_reasoning.split("**Confidence score:**")[0].strip("\n"), refined_reasoning.split("**Confidence score:**")[1].strip()
-        conf_f = conf_f.splitlines()[0]
+            reasoning_new, conf_f = refined_reasoning.split("**Confidence score:**")[0].strip("\n"), refined_reasoning.split("**Confidence score:**")[1].strip()
+            conf_f = conf_f.splitlines()[0]
 
-        print('GOT REASONING NEW: ', reasoning_new)
-        print('GOT CONFIDENCE STRING: ', conf_f)
+            print('GOT REASONING NEW: ', reasoning_new)
+            print('GOT CONFIDENCE STRING: ', conf_f)
 
-        # extract the confidence score and the refined components
-        conf = float(re.findall(r"\d+\.?\d*", conf_f)[0])
-        reasoning_new = "**Reasoning/calculation process:**" + reasoning_new.split("**Reasoning/calculation process:**")[1]
+            # extract the confidence score and the refined components
+            conf = float(re.findall(r"\d+\.?\d*", conf_f)[0])
+            reasoning_new = "**Reasoning/calculation process:**" + reasoning_new.split("**Reasoning/calculation process:**")[1]
 
-        print('GOT REASONING NEW TWO: ', reasoning_new)
-        print('GOT CONFIDENCE SCORE: ', conf)
+            print('GOT REASONING NEW TWO: ', reasoning_new)
+            print('GOT CONFIDENCE SCORE: ', conf)
 
-        if conf > max_confidence:
-            max_confidence = conf
-            reasoning = reasoning_new
-        else:
-            reasoning = reasoning
+            if conf > max_confidence:
+                max_confidence = conf
+                reasoning = reasoning_new
+            else:
+                reasoning = reasoning
 
-        n_attempts += 1
+            n_attempts += 1
+        
+        except Exception as e:
+            print('EXCEPTION R: ', e)
+            flag = False
 
     if n_attempts > 0 :
         flag = False

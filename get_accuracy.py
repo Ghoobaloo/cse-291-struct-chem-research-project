@@ -17,14 +17,14 @@ def equiv(model_output, answer, unit):
         return True
     return False
 
-#DATASET = "atkins"
-#SIZE = 105
+DATASET = "atkins"
+SIZE = 105
 #DATASET = "chemmc"
 #SIZE = 38
 #DATASET = "matter"
 #SIZE = 47
-DATASET = "quan"
-SIZE = 33
+#DATASET = "quan"
+#SIZE = 33
 
 with open("./scibench/dataset/original/" + DATASET + ".json") as f:
     original = json.load(f)
