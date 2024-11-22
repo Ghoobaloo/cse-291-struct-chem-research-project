@@ -1,7 +1,7 @@
 import torch
 from datasets import load_dataset
 from transformers import AutoTokenizer, DataCollatorForLanguageModeling
-from prompts.baseline import baseline_cot_prompt_config
+from prompts.baseline import prompt_config
 
 # Download the SciBench dataset to set up an evaluation pipeline
 def load_sci_bench_dataset(source: str = None):
@@ -18,10 +18,20 @@ def get_sci_bench_datasets_for_student(
 ):
     def tokenize(sample):
         # Grab the system prompt from the baseline config under the key "prompt_template"
-        prompt_template = baseline_cot_prompt_config["prompt_template"]
+        prompt_template = prompt_config["pot_prompt_template"]
+
+        # Create messages using the LLaMA prompt template
+        messages = [
+            {"role": "system", "content": prompt_template},
+            {"role": "student", "content": sample["problem_text"]},
+        ]
 
         # Concatenate the prompt template with two newlines and the problem text
-        formatted_problem = f"### Instruction:\n{prompt_template}\n\n### Problem:\n{sample['problem_text']}\n\n### Solution:\n"
+        formatted_problem = tokenizer.apply_chat_template(
+            messages,
+            tokenize=False,
+            add_generation_prompt=True,
+        )
 
         result = tokenizer.__call__(
             formatted_problem,
@@ -37,8 +47,9 @@ def get_sci_bench_datasets_for_student(
             truncation=True,
             return_tensors="pt",
         )
-        result["labels"] = tokenized_problem_id["input_ids"].clone()
+        result["problem_id"] = tokenized_problem_id["input_ids"].clone()
         return result
+    
     dataset = load_sci_bench_dataset(source)
     dataset = dataset.map(tokenize)
     # remove other columns

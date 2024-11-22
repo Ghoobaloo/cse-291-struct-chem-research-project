@@ -34,7 +34,9 @@ def verify_dataloader_uniqueness(dataloader):
     print(f"No duplicates found in {total_samples} samples")
     return True
 
-model_name = "meta-llama/Meta-Llama-3-8B-Instruct"
+# model_name = "meta-llama/Meta-Llama-3.1-8B-Instruct"
+model_name = "meta-llama/Llama-3.1-8B-Instruct"
+# model_name = "neuralmagic/Meta-Llama-3-8B-Instruct-quantized.w8a16"
 model, tokenizer = get_model_and_tokenizer(model_name)
 device = "cuda" if torch.cuda.is_available() else "cpu"
 model.eval().to(device)
@@ -45,7 +47,7 @@ sequence_length = 1024
 dataloader = get_sci_bench_dataloader_for_student(tokenizer=tokenizer, source=source, batch_size=batch_size, sequence_length=sequence_length)
 print("Dataloader length: ", len(dataloader))
 
-file_path_to_write = "student_generated_text.csv"
+file_path_to_write = "student_generated_pot_text_atkins.csv"
 
 # Write header and keep file open for the loop
 with open(file_path_to_write, 'w', newline='', encoding='utf-8') as f:
@@ -57,20 +59,32 @@ with open(file_path_to_write, 'w', newline='', encoding='utf-8') as f:
     for batch in tqdm(dataloader, desc="Generating responses"):
         input_ids = batch["input_ids"].to(device)
         attention_mask = batch["attention_mask"].to(device)
-        labels = batch["labels"].to(device)
+        problem_ids = batch["problem_id"].to(device)
 
         # Generate outputs
+        # generated_ids = model.generate(
+        #     input_ids=batch["input_ids"].squeeze().to("cuda"),
+        #     attention_mask=batch["attention_mask"].squeeze().to("cuda"),
+        #     pad_token_id=tokenizer.pad_token_id,
+        #     max_new_tokens=512,
+        # )
         generated_ids = model.generate(
             input_ids=batch["input_ids"].squeeze().to("cuda"),
             attention_mask=batch["attention_mask"].squeeze().to("cuda"),
             pad_token_id=tokenizer.pad_token_id,
-            max_new_tokens=512,
+            max_new_tokens=1024,
+            temperature=0.7,         # Controls randomness (0.0-1.0). Lower = more focused
+            top_p=0.9,              # Nucleus sampling threshold. Higher = more diverse
+            top_k=50,               # Limits vocabulary to top K tokens
+            do_sample=True,         # Enable sampling (vs greedy decoding)
+            repetition_penalty=1.1   # Penalize repeated tokens. >1.0 reduces repetition
         )
 
         for i in range(batch_size):
             try:
-                question_id = tokenizer.decode(labels[i].squeeze(), skip_special_tokens=True)
+                question_id = tokenizer.decode(problem_ids[i].squeeze(), skip_special_tokens=True)
                 generated_text = tokenizer.decode(generated_ids[i], skip_special_tokens=True)
+                input_prompt = tokenizer.decode(input_ids[i].squeeze(), skip_special_tokens=True)
                 
                 # Clean the text
                 question_id = question_id.replace('\n', ' ').replace('\r', ' ').strip()
