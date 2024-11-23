@@ -18,7 +18,7 @@ def get_sci_bench_datasets_for_student(
 ):
     def tokenize(sample):
         # Grab the system prompt from the baseline config under the key "prompt_template"
-        prompt_template = prompt_config["pot_prompt_template"]
+        prompt_template = prompt_config["cot_prompt_template"]
 
         # Create messages using the LLaMA prompt template
         messages = [

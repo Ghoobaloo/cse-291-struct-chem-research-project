@@ -37,17 +37,19 @@ def verify_dataloader_uniqueness(dataloader):
 # model_name = "meta-llama/Meta-Llama-3.1-8B-Instruct"
 model_name = "meta-llama/Llama-3.1-8B-Instruct"
 # model_name = "neuralmagic/Meta-Llama-3-8B-Instruct-quantized.w8a16"
+# model_name = "SanctumAI/gemma-2-9b-it-GGUF:Q4_K_M"
+
 model, tokenizer = get_model_and_tokenizer(model_name)
 device = "cuda" if torch.cuda.is_available() else "cpu"
 model.eval().to(device)
-source = "atkins"
+source = "chemmc"
 batch_size = 4
 sequence_length = 1024
 
 dataloader = get_sci_bench_dataloader_for_student(tokenizer=tokenizer, source=source, batch_size=batch_size, sequence_length=sequence_length)
 print("Dataloader length: ", len(dataloader))
 
-file_path_to_write = "student_generated_pot_text_atkins.csv"
+file_path_to_write = "student_generated_cot_text_chemmc.csv"
 
 # Write header and keep file open for the loop
 with open(file_path_to_write, 'w', newline='', encoding='utf-8') as f:
