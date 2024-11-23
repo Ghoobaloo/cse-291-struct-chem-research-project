@@ -70,21 +70,21 @@ def process_results(df):
     
     # Save the DataFrame to results.csv with additional columns
     results = df[["problemid", "answer_number", "boxed_answer", "correct"]]
-    results.to_csv("results_pot.csv", index=False)
+    results.to_csv("results_pot_chemmc.csv", index=False)
     print("Results saved to 'results.csv'")
 
-dataset = load_sci_bench_dataset(source="atkins")
+dataset = load_sci_bench_dataset(source="chemmc")
 print(dataset)
 # Call the function to save the train split of the dataset
-save_dataset_to_csv(dataset, "atkins.csv")
+save_dataset_to_csv(dataset, "chemmc.csv")
 
 # Merge student answer and correct answer
 # Load the dataset.csv file
-dataset_df = pd.read_csv("atkins.csv")
+dataset_df = pd.read_csv("chemmc.csv")
 
 # Load the student.csv file
 # Assumes outputted file from student is called student.csv
-student_df = pd.read_csv("./cse291_proj/student_generated_pot_text_atkins.csv")
+student_df = pd.read_csv("./cse291_proj/student_generated_pot_text_chemmc.csv")
 print(student_df)
 
 # Test for number of matches
